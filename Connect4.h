@@ -1,7 +1,7 @@
 #pragma once
 
-class Board;
-class AI;
+#include "Board.h"
+#include "AI.h"
 
 class Connect4 {
 

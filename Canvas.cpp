@@ -18,7 +18,7 @@ Canvas::Canvas(int numbersOColumn, int numbersOfLine)
 
 Canvas::Canvas(const Board& b)
 {	
-	Canvas(b.numbersOfColumn(), b.numbersOfLine());
+	Canvas(b.getCols(), b.getRows());
 }
 
 void Canvas::drawBoard(int numbersOfColumn, int numbersOfLine)const

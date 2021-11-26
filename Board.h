@@ -26,7 +26,9 @@ private:
 
 public:
 	// L'affichage devra se faire a l'envers pour correspondre 
-	Board(int cols=7, int rows=6, int connectedTokensToWin=4);
+	Board(int cols, int rows, int connectedTokensToWin);
+
+	Board();
 
 	int getCols() const;
 	int getRows() const;

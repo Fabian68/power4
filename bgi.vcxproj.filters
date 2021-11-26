@@ -64,6 +64,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Bouton.cpp">
+	  <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Connect4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -97,6 +99,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bouton.h">
+	  <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Connect4.h">
       <Filter>Header Files</Filter>
     </ClInclude>

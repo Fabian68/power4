@@ -1,13 +1,17 @@
 #include "Board.h"
 
+Board::Board() {
+	*this = Board(7,6,4);
+}
+
 Board::Board(int colNumber, int rowNumber, int connectedTokensToWin) : _cols{colNumber}, _rows{rowNumber},_connectedTokensToWin{connectedTokensToWin},
 	_winner{PLAYER_NONE}, _currentPlayer{PLAYER_1}
 {
-	_board.resize(_cols);
-	_discHeights.resize(_cols, 0);
+	_board.resize(colNumber);
+	_discHeights.resize(colNumber, 0);
 
-	for (int i = 0;i < _cols;i++) {
-		_board[i].resize(_rows, 0);
+	for (int i = 0;i < colNumber;i++) {
+		_board[i].resize(rowNumber, 0);
 	}
 
 }
@@ -110,7 +114,7 @@ bool Board::checkDiagonals(int col, int row)
 		++k;
 	}
 
-	int k = 1;
+	k = 1;
 	while (col + k < _cols && row + k < _rows && _board[col + k][row + k] == playedColor)
 	{
 		++connectedTokens;
@@ -125,14 +129,14 @@ bool Board::checkDiagonals(int col, int row)
 
 	// Second diagonal
 	connectedTokens = 0;
-	int k = 0;
+	k = 0;
 	while (col - k >= 0 && row + k < _rows && _board[col + k][row - k] == playedColor)
 	{
 		++connectedTokens;
 		++k;
 	}
 
-	int k = 1;
+k = 1;
 	while (col + k < _cols && row - k >= 0 && _board[col + k][row - k] == playedColor)
 	{
 		++connectedTokens;
