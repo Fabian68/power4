@@ -136,7 +136,7 @@ bool Board::checkDiagonals(int col, int row)
 		++k;
 	}
 
-k = 1;
+	k = 1;
 	while (col + k < _cols && row - k >= 0 && _board[col + k][row - k] == playedColor)
 	{
 		++connectedTokens;

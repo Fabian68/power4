@@ -4,7 +4,7 @@
 
 AI::AI()
 {
-	AI(&Board());
+	AI(new Board());
 }
 
 AI::AI(Board* board): _board{board}

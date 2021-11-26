@@ -13,8 +13,8 @@ TEST_CASE("Testing the board") {
     }
    
     b.addDisc(0);
-   // CHECK_EQ(b.getValue(0, 0),PLAYER_1);
-    /*
+    CHECK_EQ(b.getValue(0, 0),PLAYER_1);
+    
     b.addDisc(0);
     CHECK_EQ(b.getValue(0, 1), PLAYER_1);
 
@@ -33,7 +33,7 @@ TEST_CASE("Testing the board") {
     CHECK_EQ(b.getValue(0, 5), PLAYER_1);
 
     //b.addDisc(0, 1);
-    CHECK_EQ(b.isFilled(0), true);*/
+    CHECK_EQ(b.isFilled(0), true);
 }
 
 TEST_CASE("Tesing the canvas") {
