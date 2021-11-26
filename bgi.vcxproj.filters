@@ -13,69 +13,75 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\winbgim">
+      <UniqueIdentifier>{5be0381f-f79c-44bc-abac-bd91278a3347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\winbgim">
+      <UniqueIdentifier>{eac3004b-adbe-4f62-8d46-323e46623ae1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bgiout.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="winthread.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="drawing.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="misc.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="palette.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="text.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mouse.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="winbgi.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="file.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dibutil.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bgiout.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="dibutil.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="file.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="misc.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="mouse.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="palette.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="text.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="winbgi.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
+    <ClCompile Include="winthread.cxx">
+      <Filter>Source Files\winbgim</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="winbgim.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="winbgitypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="winbgi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dibutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="doctest.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dibutil.h">
+      <Filter>Header Files\winbgim</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
+      <Filter>Header Files\winbgim</Filter>
+    </ClInclude>
+    <ClInclude Include="winbgi.h">
+      <Filter>Header Files\winbgim</Filter>
+    </ClInclude>
+    <ClInclude Include="winbgim.h">
+      <Filter>Header Files\winbgim</Filter>
+    </ClInclude>
+    <ClInclude Include="winbgitypes.h">
+      <Filter>Header Files\winbgim</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
