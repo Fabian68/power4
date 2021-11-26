@@ -1,32 +1,53 @@
 #pragma once
 
 #include <vector>
-class Board
-{
+
+using std::vector;
+
+
+const int PLAYER_NONE = 0;
+const int PLAYER_1 = 1;
+const int PLAYER_2 = 2;
+
+
+class Board {
+
 private:
-	std::vector<std::vector<int>> _board;
+	vector<vector<int>> _board;
 
-	//pour connaitre en temps réel le remplissage du plateau
-	std::vector<int> _discsHeights;
+	// Pour connaitre en temps réel le remplissage du plateau
+	vector<int> _discHeights;
 
-	int _numbersOfColumn;
-	int _numbersOfLine;
+	int _rows;
+	int _cols;
+	int _winner;
+	int _currentPlayer;
+	int _connectedTokensToWin;
 
 public:
-	//L'affichage devra se faire a l'envers pour correspondre 
-	Board(int numbersOfColumn=7,int numbersOfLine=6 );
-	void addDisc(int columnNumber, int value);
-	bool isFilled(int columnNumber);
+	// L'affichage devra se faire a l'envers pour correspondre 
+	Board(int cols=7, int rows=6, int connectedTokensToWin=4);
 
-	//We need the coordonates in order to only around the last coordonate played and not on all the board
-	bool checkVerticalLine(int columnNumber, int lineNumber,int value);
-	bool checkHorizontalLine(int columnNumber, int lineNumber,int value);
-	bool checkDiagonals(int columnNumber, int lineNumber,int value);
+	int getCols() const;
+	int getRows() const;
+	int getPlayer() const;
+	int getWinner() const;
+	int getConnectedTokensToWin() const;
 
-	int value(int columnNuumber, int lineNumber);//testing purpose
+	bool isThereAWinner() const;
 
-	int numbersOfColumn();
-	int numbersOfLine();
+	int getValue(int columnNuumber, int lineNumber) const; //testing purpose
+	bool isFilled(int columnNumber) const;
+
+	// Check winning lines for the last play
+	bool checkVerticalLine(int col, int row) ;
+	bool checkHorizontalLine(int col, int row) ;
+	bool checkDiagonals(int col, int row) ;
+
+	void addDisc(int columnNumber);
+
+
+
 
 };
 

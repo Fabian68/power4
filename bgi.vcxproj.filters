@@ -60,6 +60,12 @@
     <ClCompile Include="winthread.cxx">
       <Filter>Source Files\winbgim</Filter>
     </ClCompile>
+    <ClCompile Include="Connect4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -82,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="winbgitypes.h">
       <Filter>Header Files\winbgim</Filter>
+    </ClInclude>
+    <ClInclude Include="Connect4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
