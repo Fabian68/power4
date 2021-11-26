@@ -62,10 +62,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="bgiout.cxx" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Bouton.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Connect4.cpp" />
     <ClCompile Include="dibutil.cxx" />
     <ClCompile Include="drawing.cxx" />
     <ClCompile Include="file.cxx" />
@@ -79,9 +81,11 @@
     <ClCompile Include="winthread.cxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Bouton.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Connect4.h" />
     <ClInclude Include="dibutil.h" />
     <ClInclude Include="doctest.h" />
     <ClInclude Include="graphics.h" />
