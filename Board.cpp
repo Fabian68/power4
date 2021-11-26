@@ -29,12 +29,12 @@ int Board::value(int columnNuumber, int lineNumber)
 	return _board[columnNuumber][lineNumber];
 }
 
-int Board::numbersOfColumn()
+int Board::numbersOfColumn()const
 {
 	return _numbersOfColumn;
 }
 
-int Board::numbersOfLine()
+int Board::numbersOfLine()const
 {
 	return _numbersOfLine;
 }

@@ -64,6 +64,8 @@
   <ItemGroup>
     <ClCompile Include="bgiout.cxx" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Bouton.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="dibutil.cxx" />
     <ClCompile Include="drawing.cxx" />
     <ClCompile Include="file.cxx" />
@@ -78,6 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Bouton.h" />
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="dibutil.h" />
     <ClInclude Include="doctest.h" />
     <ClInclude Include="graphics.h" />

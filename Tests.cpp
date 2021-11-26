@@ -1,8 +1,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "Board.h"
-
-
+#include "Canvas.h"
+#include "graphics.h"
 
 TEST_CASE("Testing the board") {
     Board b = Board();
@@ -34,4 +34,14 @@ TEST_CASE("Testing the board") {
 
     //b.addDisc(0, 1);
     CHECK_EQ(b.isFilled(0), true);
+}
+
+TEST_CASE("Tesing the canvas") {
+    Canvas v = Canvas(7,6);
+    v.drawDisc(0, 0, GREEN);
+    v.drawDisc(5, 0, RED);
+    while (!kbhit())
+    {
+        delay(200);
+    }
 }

@@ -25,8 +25,8 @@ public:
 
 	int value(int columnNuumber, int lineNumber);//testing purpose
 
-	int numbersOfColumn();
-	int numbersOfLine();
+	int numbersOfColumn()const;
+	int numbersOfLine()const;
 
 };
 
