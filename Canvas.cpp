@@ -8,7 +8,7 @@ Canvas::Canvas()
 	//todo
 }
 
-// Save a ptr of the board to draw, init the window and draw the board
+// Save a ptr of the board to draw, init the window and the buttons, and draw all the components (board, buttons and player name)
 Canvas::Canvas(Board& board): _board{&board}
 {
 	initwindow(1400, 850, "First Sample");
