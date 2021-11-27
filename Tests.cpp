@@ -37,7 +37,18 @@ TEST_CASE("Testing the board") {
 }
 
 TEST_CASE("Tesing the canvas") {
-    Canvas v = Canvas(7,6);
+    Board b = Board{};
+    Canvas v = Canvas{ b };
+
+    CHECK_EQ(v.getBoard()->getCols(), b.getCols());
+    CHECK_EQ(v.getBoard()->getCols(), 7);
+
+    CHECK_EQ(v.getBoard()->getRows(), b.getRows());
+    CHECK_EQ(v.getBoard()->getRows(), 6);
+
+    CHECK_EQ(v.getBoard()->getConnectedTokensToWin(), b.getConnectedTokensToWin());
+    CHECK_EQ(v.getBoard()->getConnectedTokensToWin(), 4);
+    
     v.drawDisc(0, 0, GREEN);
     v.drawDisc(5, 0, RED);
     while (!kbhit())

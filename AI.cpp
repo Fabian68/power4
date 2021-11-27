@@ -2,17 +2,18 @@
 #include "Board.h"
 
 
-AI::AI()
-{
-	AI(new Board());
-}
+AI::AI() : Player{}
+{}
 
-AI::AI(Board* board): _board{board}
-{
-
-}
+AI::AI(Board* board): Player{board}
+{}
 
 AI::~AI()
 {
-	delete _board;
+	_board = nullptr;
+}
+
+void AI::playTurn()
+{
+
 }

@@ -4,11 +4,9 @@
 
 using std::vector;
 
-
 const int PLAYER_NONE = 0;
 const int PLAYER_1 = 1;
 const int PLAYER_2 = 2;
-
 
 class Board {
 
@@ -26,9 +24,7 @@ private:
 
 public:
 	// L'affichage devra se faire a l'envers pour correspondre 
-	Board(int cols, int rows, int connectedTokensToWin);
-
-	Board();
+	Board(int cols=7, int rows=6, int connectedTokensToWin=4);
 
 	int getCols() const;
 	int getRows() const;
@@ -46,6 +42,7 @@ public:
 	bool checkHorizontalLine(int col, int row) ;
 	bool checkDiagonals(int col, int row) ;
 
-	void addDisc(int columnNumber);
+	bool addDisc(int columnNumber);
+	void clear();
 };
 

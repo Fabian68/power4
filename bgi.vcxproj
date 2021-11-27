@@ -61,7 +61,9 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>  
+  <ItemGroup>
+    <ClCompile Include="Human.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="bgiout.cxx" />
@@ -76,7 +78,6 @@
     <ClCompile Include="mouse.cxx" />
     <ClCompile Include="palette.cxx" />
     <ClCompile Include="main.cxx" />
-  
     <ClCompile Include="text.cxx" />
     <ClCompile Include="winbgi.cxx" />
     <ClCompile Include="winthread.cxx" />
@@ -90,6 +91,8 @@
     <ClInclude Include="dibutil.h" />
     <ClInclude Include="doctest.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="Human.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="winbgi.h" />
     <ClInclude Include="winbgim.h" />
     <ClInclude Include="winbgitypes.h" />

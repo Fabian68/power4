@@ -2,17 +2,16 @@
 
 #include "Player.h"
 
-class Board;
 
-class AI : public Player
+class Human : public Player
 {
-private :
+private:
 
 
 public:
-	AI();
-	AI(Board* board);
-	~AI();
+	Human();
+	Human(Board* board);
+	~Human();
 
 	virtual void playTurn() override;
 

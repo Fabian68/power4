@@ -1,17 +1,13 @@
 #include "Board.h"
 
-Board::Board() {
-	*this = Board(7,6,4);
-}
-
-Board::Board(int colNumber, int rowNumber, int connectedTokensToWin) : _cols{colNumber}, _rows{rowNumber},_connectedTokensToWin{connectedTokensToWin},
+Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{cols}, _rows{rows},_connectedTokensToWin{connectedTokensToWin},
 	_winner{PLAYER_NONE}, _currentPlayer{PLAYER_1}
 {
-	_board.resize(colNumber);
-	_discHeights.resize(colNumber, 0);
+	_board.resize(cols);
+	_discHeights.resize(rows, 0);
 
-	for (int i = 0;i < colNumber;i++) {
-		_board[i].resize(rowNumber, 0);
+	for (int i = 0;i < cols;i++) {
+		_board[i].resize(rows, 0);
 	}
 
 }
@@ -152,10 +148,24 @@ bool Board::checkDiagonals(int col, int row)
 	else return false;
 }
 
-void Board::addDisc(int col)
+bool Board::addDisc(int col)
 {
 	if (!isFilled(col)) {
 		_board[col][_discHeights[col]] = _currentPlayer;
 		++_discHeights[col];
+		return true;
+	}
+
+	else return false;
+}
+
+void Board::clear()
+{
+	for (int i = 0; i < _cols; i++)
+	{
+		for (int j = 0; j < _rows; j++)
+		{
+			_board[i][j] = PLAYER_NONE;
+		}
 	}
 }
