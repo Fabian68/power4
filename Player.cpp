@@ -11,3 +11,8 @@ Player::~Player()
 {
 	_board = nullptr;
 }
+
+string Player::hello() const
+{
+	return "Hello by Player";
+}

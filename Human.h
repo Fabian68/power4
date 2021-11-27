@@ -16,5 +16,7 @@ public:
 	// Plays by clicking on the screen to put a token in a column
 	virtual void playTurn() override;
 
+	virtual string hello() const override;
+
 };
 

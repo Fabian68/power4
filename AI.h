@@ -18,5 +18,7 @@ public:
 	// Plays by itself with calcul
 	virtual void playTurn() override;
 
+	virtual string hello() const override;
+
 };
 

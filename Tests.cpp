@@ -3,6 +3,26 @@
 #include "Board.h"
 #include "Canvas.h"
 #include "graphics.h"
+#include "Human.h"
+#include "AI.h"
+
+
+TEST_CASE("Tesing the Player polymorphism") {
+    Player* h = new Human();
+    Player* ai = new AI();
+
+
+    SUBCASE("message by human correct")
+    {
+        REQUIRE_EQ(h->hello(), "Hello by Human");
+    }
+
+    SUBCASE("message by ai correct")
+    {
+        REQUIRE_EQ(ai->hello(), "Hello by AI");
+    }
+}
+
 
 TEST_CASE("Testing the board") {
     Board b = Board();

@@ -1,5 +1,10 @@
 #pragma once
 
+#include <string>
+#include <iostream>
+
+using std::string;
+
 class Board;
 
 // An abstract Player
@@ -15,6 +20,8 @@ public:
 
 	// We do not know how is he playing
 	virtual void playTurn()=0;
+
+	virtual string hello() const;
 
 };
 
