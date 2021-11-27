@@ -16,8 +16,11 @@ private:
 	// Pour connaitre en temps réel le remplissage du plateau
 	vector<int> _discHeights;
 
+	// nb of rows and cols
 	int _rows;
 	int _cols;
+
+	// the num of the winner if exists, the player num who must play, and the number of tokens to align to win
 	int _winner;
 	int _currentPlayer;
 	int _connectedTokensToWin;
@@ -26,6 +29,7 @@ public:
 	// L'affichage devra se faire a l'envers pour correspondre 
 	Board(int cols=7, int rows=6, int connectedTokensToWin=4);
 
+	// getters
 	int getCols() const;
 	int getRows() const;
 	int getPlayer() const;

@@ -1,15 +1,15 @@
 #include "Board.h"
 
-Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{cols}, _rows{rows},_connectedTokensToWin{connectedTokensToWin},
+// Init params and board with the empty value, num of player and none winner 
+Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{cols}, _rows{rows}, _connectedTokensToWin{connectedTokensToWin},
 	_winner{PLAYER_NONE}, _currentPlayer{PLAYER_1}
 {
 	_board.resize(cols);
 	_discHeights.resize(rows, 0);
 
 	for (int i = 0;i < cols;i++) {
-		_board[i].resize(rows, 0);
+		_board[i].resize(rows, PLAYER_NONE);
 	}
-
 }
 
 int Board::getCols() const
@@ -159,6 +159,7 @@ bool Board::addDisc(int col)
 	else return false;
 }
 
+// Clear the board and put the empty value everywhere (PLAYER_NONE)
 void Board::clear()
 {
 	for (int i = 0; i < _cols; i++)

@@ -3,9 +3,9 @@
 #include "Player.h"
 #include "Canvas.h"
 
-Connect4::Connect4() : _board{},_p1{ nullptr }, _p2{ nullptr }
+// init the board, the canvas with the board and the players todo
+Connect4::Connect4() : _board{}, _canvas{ _board }, _p1{ nullptr }, _p2{ nullptr }
 {
-	_canvas = Canvas{_board};
 }
 
 Connect4::Connect4(int cols, int rows, int connectedTokensToWin) : _board{ cols,rows,connectedTokensToWin }, _canvas{ _board },_p1{ nullptr }, _p2{ nullptr }

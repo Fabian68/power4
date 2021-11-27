@@ -1,24 +1,24 @@
 #include "Canvas.h"
 #include "graphics.h"
 #include "Board.h"
+#include "Bouton.h"
 
 Canvas::Canvas()
 {
 	//todo
 }
 
+// Save a ptr of the board to draw, init the window and draw the board
 Canvas::Canvas(Board& board): _board{&board}
 {
 	initwindow(1400, 850, "First Sample");
 	setbkcolor(0);
 	setcolor(RED);
-	drawBoard();
-	displayText(700, 20, "Tour du joueur : ");
-	_button.resize(_board->getCols());
+	_buttons.resize(_board->getCols());
 	for (int i = 0; i < _board->getCols(); i++) {
-		_button[i] = Bouton(i * 100 + 100, 150, "Not a Name", 0, WHITE, WHITE);
-		_button[i].afficher();
+		_buttons[i] = Bouton{ i * 100 + 100, 150, "Not a Name", 0, WHITE, WHITE };
 	}
+	redraw();
 }
 
 Canvas::~Canvas()
@@ -31,7 +31,24 @@ Board* Canvas::getBoard() const
 	return _board;
 }
 
-void Canvas::drawBoard()const
+// Draw all the canvas elements
+void Canvas::redraw() const
+{
+	displayText(700, 20, "Tour du joueur : ");
+	drawButtons();
+	drawBoard();
+}
+
+// Draw the buttons to put a token
+void Canvas::drawButtons() const
+{
+	for (int i = 0; i < _board->getCols(); i++) {
+		_buttons[i].afficher();
+	}
+}
+
+// Draw the board and tokens
+void Canvas::drawBoard() const
 {
 	setfillstyle(1, LIGHTGRAY);
 	setcolor(BLACK);
@@ -44,6 +61,7 @@ void Canvas::drawBoard()const
 	}
 }
 
+// Draw a disc
 void Canvas::drawDisc(int column, int row, int color)const {
 	setfillstyle(1, color);
 	setcolor(color);
@@ -51,8 +69,10 @@ void Canvas::drawDisc(int column, int row, int color)const {
 	fillellipse(column*100+150, row*100+250, 45, 45);
 }
 
+// Display the current player name
 void Canvas::displayText(int x, int y, std::string texte)const {
 	setcolor(WHITE);
 	char* txt = const_cast<char*>(texte.c_str());
 	outtextxy(x, y, txt);
 }
+
