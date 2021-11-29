@@ -22,7 +22,7 @@ private:
 
 	// the num of the winner if exists, the player num who must play, and the number of tokens to align to win
 	int _winner;
-	int _currentPlayer;
+	int _nextPlayer;
 	int _connectedTokensToWin;
 
 public:
@@ -32,7 +32,7 @@ public:
 	// getters
 	int getCols() const;
 	int getRows() const;
-	int getPlayer() const;
+	int getNextPlayer() const;
 	int getWinner() const;
 	int getConnectedTokensToWin() const;
 
@@ -40,12 +40,13 @@ public:
 
 	int getValue(int columnNuumber, int lineNumber) const; //testing purpose
 	bool isFilled(int columnNumber) const;
-	bool allFilled(int col) const;
+	bool allFilled() const;
 
 	// Check winning lines for the last play
 	bool checkVerticalLine(int col, int row) ;
 	bool checkHorizontalLine(int col, int row) ;
 	bool checkDiagonals(int col, int row) ;
+	bool checkConnect(int col);
 
 	bool addDisc(int columnNumber);
 	void clear();

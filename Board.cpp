@@ -2,7 +2,7 @@
 
 // Init params and board with the empty value, num of player and none winner 
 Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{cols}, _rows{rows}, _connectedTokensToWin{connectedTokensToWin},
-	_winner{PLAYER_NONE}, _currentPlayer{PLAYER_1}
+	_winner{PLAYER_NONE}, _nextPlayer{PLAYER_1}
 {
 	_board.resize(cols);
 	_discHeights.resize(rows, 0);
@@ -22,9 +22,9 @@ int Board::getRows() const
 	return _rows;
 }
 
-int Board::getPlayer() const
+int Board::getNextPlayer() const
 {
-	return _currentPlayer;
+	return _nextPlayer;
 }
 
 int Board::getWinner() const
@@ -52,7 +52,7 @@ bool Board::isFilled(int col) const
 	return _rows <= (_discHeights[col]);
 }
 
-bool Board::allFilled(int col) const
+bool Board::allFilled() const
 {
 	int i = 0;
 	while (i < _cols && isFilled(i))
@@ -156,11 +156,19 @@ bool Board::checkDiagonals(int col, int row)
 	else return false;
 }
 
+bool Board::checkConnect(int col)
+{
+	int row = _discHeights[col];
+	return (checkVerticalLine(col, row) || checkHorizontalLine(col, row) || checkDiagonals(col, row));
+}
+
 bool Board::addDisc(int col)
 {
 	if (!isFilled(col)) {
-		_board[col][_discHeights[col]] = _currentPlayer;
+		_board[col][_discHeights[col]] = _nextPlayer;
 		++_discHeights[col];
+		if (_nextPlayer == PLAYER_1) _nextPlayer = PLAYER_2;
+		else _nextPlayer = PLAYER_1;
 		return true;
 	}
 

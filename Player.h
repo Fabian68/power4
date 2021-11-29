@@ -12,11 +12,14 @@ class Player
 {
 protected:
 	Board* _board;
+	int _lastColPlayed;
 
 public:
 	Player();
 	Player(Board* board);
 	virtual ~Player();
+
+	int getLastColPlayed() const;
 
 	// We do not know how is he playing
 	virtual void playTurn()=0;

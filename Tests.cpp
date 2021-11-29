@@ -36,13 +36,13 @@ TEST_CASE("Testing the board") {
     CHECK_EQ(b.getValue(0, 0),PLAYER_1);
     
     b.addDisc(0);
-    CHECK_EQ(b.getValue(0, 1), PLAYER_1);
+    CHECK_EQ(b.getValue(0, 1), PLAYER_2);
 
     b.addDisc(0);
     CHECK_EQ(b.getValue(0, 2), PLAYER_1);
 
     b.addDisc(0);
-    CHECK_EQ(b.getValue(0, 3), PLAYER_1);
+    CHECK_EQ(b.getValue(0, 3), PLAYER_2);
 
     b.addDisc(0);
     CHECK_EQ(b.getValue(0, 4), PLAYER_1);
@@ -50,7 +50,7 @@ TEST_CASE("Testing the board") {
     CHECK_EQ(b.isFilled(0), false);
 
     b.addDisc(0);
-    CHECK_EQ(b.getValue(0, 5), PLAYER_1);
+    CHECK_EQ(b.getValue(0, 5), PLAYER_2);
 
     //b.addDisc(0, 1);
     CHECK_EQ(b.isFilled(0), true);

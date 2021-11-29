@@ -23,5 +23,7 @@ public:
 	~Connect4();
 
 	void play();
+	void displayWinner();
+	void replay();
 };
 

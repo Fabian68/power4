@@ -25,11 +25,14 @@ void RandomAI::playTurn()
 {
 	bool played = false;
 	int cols = _board->getCols();
+	int col;
 	do
 	{
-		int col = rand() % cols;
+		col = rand() % cols;
 		played = _board->addDisc(col);
 	} while (!played);
+
+	_lastColPlayed = col;
 }
 
 string RandomAI::hello() const
