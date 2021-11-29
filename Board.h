@@ -40,6 +40,7 @@ public:
 
 	int getValue(int columnNuumber, int lineNumber) const; //testing purpose
 	bool isFilled(int columnNumber) const;
+	bool allFilled(int col) const;
 
 	// Check winning lines for the last play
 	bool checkVerticalLine(int col, int row) ;

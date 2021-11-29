@@ -52,6 +52,14 @@ bool Board::isFilled(int col) const
 	return _rows <= (_discHeights[col]);
 }
 
+bool Board::allFilled(int col) const
+{
+	int i = 0;
+	while (i < _cols && isFilled(i))
+		++i;
+	return i == _cols;
+}
+
 bool Board::checkVerticalLine(int col, int row)
 {
 	int playedColor = _board[col][row];
