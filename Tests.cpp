@@ -5,12 +5,12 @@
 #include "graphics.h"
 #include "Human.h"
 #include "AI.h"
-
+#include "RandomAI.h"
 
 TEST_CASE("Tesing the Player polymorphism") {
     Player* h = new Human();
     Player* ai = new AI();
-
+    srand(time(NULL));
 
     SUBCASE("message by human correct")
     {
