@@ -21,12 +21,15 @@ private:
 	// Two players to play the game (humans or IA)
 	Player* _p1, *_p2;
 
+	// Create (return) a random player by default
+	Player* createPlayer(int playerType) const;
+
+
 public:
 	Connect4();
 	Connect4(int cols, int rows, int connectedTokensToWin, int p1Type, int p2Type);
 	~Connect4();
 
-	Player* createPlayer(int playerType) const;
 
 	// Launch the game
 	void play();
