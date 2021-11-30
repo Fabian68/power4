@@ -1,4 +1,4 @@
-#include "RandomAI.h"
+#include "RandomPlayer.h"
 
 #include "AI.h"
 #include "Board.h"
@@ -6,22 +6,22 @@
 #include <cstdlib>
 //#include <stdio.h>
 
-RandomAI::RandomAI() : Player{}
+RandomPlayer::RandomPlayer() : Player{}
 {
 	std::cout << hello();
 }
 
-RandomAI::RandomAI(Board* board) : Player{ board }
+RandomPlayer::RandomPlayer(Board* board) : Player{ board }
 {
 
 }
 
-RandomAI::~RandomAI()
+RandomPlayer::~RandomPlayer()
 {
 	_board = nullptr;
 }
 
-void RandomAI::playTurn()
+void RandomPlayer::playTurn()
 {
 	bool played = false;
 	int cols = _board->getCols();
@@ -35,7 +35,7 @@ void RandomAI::playTurn()
 	_lastColPlayed = col;
 }
 
-string RandomAI::hello() const
+string RandomPlayer::hello() const
 {
 	return "Hello by Random AI";
 }

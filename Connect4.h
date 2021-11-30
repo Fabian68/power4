@@ -22,8 +22,11 @@ public:
 	Connect4(int cols, int rows, int connectedTokensToWin);
 	~Connect4();
 
+	// Launch the game
 	void play();
+	// Display the winner on canvas
 	void displayWinner();
+	// Ask for playing one more time
 	void replay();
 };
 

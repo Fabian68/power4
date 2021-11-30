@@ -78,7 +78,7 @@
     <ClCompile Include="Human.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RandomAI.cpp">
+    <ClCompile Include="RandomPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,7 +122,7 @@
     <ClInclude Include="Human.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RandomAI.h">
+    <ClInclude Include="RandomPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

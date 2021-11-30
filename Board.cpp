@@ -180,9 +180,17 @@ void Board::clear()
 {
 	for (int i = 0; i < _cols; i++)
 	{
+		_discHeights[i] = 0;
 		for (int j = 0; j < _rows; j++)
 		{
 			_board[i][j] = PLAYER_NONE;
 		}
 	}
+}
+
+void Board::reset()
+{
+	clear();
+	_nextPlayer = _winner;
+	_winner = PLAYER_NONE;
 }

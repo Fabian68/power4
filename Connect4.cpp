@@ -36,23 +36,24 @@ void Connect4::play()
 			colPlayed = _p2->getLastColPlayed();
 		}
 
-		// Check the win
-		if (_board.checkConnect(colPlayed))
-		{
-			//todo
-			displayWinner();
-			replay();
-		}
+		// Update the winner
+		_board.checkConnect(colPlayed);
 	}
+
+	displayWinner();
+	replay();
 }
 
 void Connect4::displayWinner()
 {
 	// draw the winner on canvas instead
-	cout << "Player " << _board.getWinner() << "WINS" << endl;
+	if (_board.isThereAWinner()) cout << "Player " << _board.getWinner() << "WINS" << endl;
+	else cout << "It's a draw !" << endl;
 }
 
 void Connect4::replay()
 {
 	// rematch ?
+	_board.reset();
+
 }

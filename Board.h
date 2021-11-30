@@ -49,6 +49,9 @@ public:
 	bool checkConnect(int col);
 
 	bool addDisc(int columnNumber);
+
+	// Clear the board
 	void clear();
+	void reset();
 };
 

@@ -5,7 +5,7 @@
 #include "graphics.h"
 #include "Human.h"
 #include "AI.h"
-#include "RandomAI.h"
+#include "RandomPlayer.h"
 
 TEST_CASE("Tesing the Player polymorphism") {
     Player* h = new Human();

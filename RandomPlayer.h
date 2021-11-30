@@ -3,15 +3,15 @@
 #include "Player.h"
 
 
-class RandomAI : public Player
+class RandomPlayer : public Player
 {
 private:
 
 
 public:
-	RandomAI();
-	RandomAI(Board* board);
-	~RandomAI();
+	RandomPlayer();
+	RandomPlayer(Board* board);
+	~RandomPlayer();
 
 	// Plays by itself with calcul
 	virtual void playTurn() override;
