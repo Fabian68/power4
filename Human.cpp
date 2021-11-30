@@ -1,4 +1,5 @@
 #include "Human.h"
+#include "Board.h"
 
 Human::Human() : Player{}
 {
@@ -16,7 +17,21 @@ Human::~Human()
 
 void Human::playTurn()
 {
+	// Console (temporary)
+	cout << "Column ? : ";
+	int col;
+	cin >> col;
+	while (!_board->addDisc(col))
+	{
+		cout << "Already filled, column ? : ";
+		cin >> col;
+	}
+	
+	_lastColPlayed = col;
 
+	// Button clicks
+
+	
 }
 
 string Human::hello() const

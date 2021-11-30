@@ -3,22 +3,43 @@
 #include "Player.h"
 #include "Canvas.h"
 #include <iostream>
-using std::cout;
-using std::endl;
+#include "Human.h"
+#include "RandomPlayer.h"
+#include "AI.h"
 
 // init the board, the canvas with the board and the players todo
 Connect4::Connect4() : _board{}, _canvas{ _board }, _p1{ nullptr }, _p2{ nullptr }
 {
+	_p1 = createPlayer(HUMAN_PLAYER);
+	_p2 = createPlayer(RANDOM_PLAYER);
 }
 
-Connect4::Connect4(int cols, int rows, int connectedTokensToWin) : _board{ cols,rows,connectedTokensToWin }, _canvas{ _board },_p1{ nullptr }, _p2{ nullptr }
+Connect4::Connect4(int cols, int rows, int connectedTokensToWin, int p1Type, int p2Type) : _board{ cols,rows,connectedTokensToWin }, _canvas{ _board },_p1{ nullptr }, _p2{ nullptr }
 {
+	_p1 = createPlayer(p1Type);
+	_p2 = createPlayer(p2Type);
 }
 
 Connect4::~Connect4()
 {
 	delete _p1;
 	delete _p2;
+}
+
+Player* Connect4::createPlayer(int playerType) const
+{
+	switch (playerType)
+	{
+		case HUMAN_PLAYER:
+			return new Human();
+			break;
+		case AI_PLAYER:
+			return new AI();
+			break;
+		default :
+			return new RandomPlayer();
+			break;
+	}
 }
 
 void Connect4::play()

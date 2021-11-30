@@ -5,6 +5,10 @@
 class Player;
 #include "Canvas.h"; //class Canvas;
 
+const int HUMAN_PLAYER = 0;
+const int RANDOM_PLAYER = 1;
+const int AI_PLAYER = 2;
+
 class Connect4 {
 
 private:
@@ -19,8 +23,10 @@ private:
 
 public:
 	Connect4();
-	Connect4(int cols, int rows, int connectedTokensToWin);
+	Connect4(int cols, int rows, int connectedTokensToWin, int p1Type, int p2Type);
 	~Connect4();
+
+	Player* createPlayer(int playerType) const;
 
 	// Launch the game
 	void play();
