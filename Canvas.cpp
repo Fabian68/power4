@@ -16,11 +16,19 @@ Canvas::Canvas(Board& board): _board{&board}
 	setcolor(RED);
 	_buttons.resize(_board->getCols());
 	for (int i = 0; i < _board->getCols(); i++) {
-		_buttons[i] = Bouton{ i * 100 + 100, 150, "Not a Name", 0, WHITE, WHITE };
+		setfillstyle(1, RED);
+		setcolor(RED);
+		_buttons[i] = Bouton{ i * 100 + 100, 150, "        ", RED, WHITE, WHITE };
 	}
+	//drawMenu()
 	redraw();
+	
+	
+	//cleardevice(); pour nettoyer l'ecran
 }
 
+//ajouter getter des bouton
+//fonction renvoyer id bouton cliquer
 Canvas::~Canvas()
 {
 	_board = nullptr;
@@ -65,8 +73,8 @@ void Canvas::drawBoard() const
 void Canvas::drawDisc(int column, int row, int color)const {
 	setfillstyle(1, color);
 	setcolor(color);
-
-	fillellipse(column*100+150, row*100+250, 45, 45);
+	int maxRow = getBoard()->getRows();
+	fillellipse(column*100+150, (maxRow-row-1)*100+250, 45, 45);
 }
 
 // Display the current player name
