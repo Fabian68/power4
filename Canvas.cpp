@@ -11,7 +11,9 @@ Canvas::Canvas()
 // Save a ptr of the board to draw, init the window and the buttons, and draw all the components (board, buttons and player name)
 Canvas::Canvas(Board& board): _board{&board}
 {
-	initwindow(1400, 850, "First Sample");
+	int sizeX = 1400;
+	int sizeY = 850;
+	initwindow(sizeX, sizeY, "Game de ouf");
 	setbkcolor(0);
 	setcolor(RED);
 	_buttons.resize(_board->getCols());
@@ -20,14 +22,127 @@ Canvas::Canvas(Board& board): _board{&board}
 		setcolor(RED);
 		_buttons[i] = Bouton{ i * 100 + 100, 150, "        ", RED, WHITE, WHITE };
 	}
-	//drawMenu()
-	redraw();
+	drawMenu();
+	//redraw();
 	
 	
 	//cleardevice(); pour nettoyer l'ecran
 }
 
+void Canvas::drawMenu()const {
+	const int RANDOM_IA=0;
+	const int GOOD_IA = 1;
+	const int HUMAN_PLAYER = 2;
+	int choixJoueur1=RANDOM_IA;
+	int choixJoueur2=RANDOM_IA;
+	int x = 100;
+	int y = 200;
+	int pasY = 100;
+	int pasX = 150;
+	bool choixFait=false;
+	boolean clique;
+	int DELAY = 50;
+	int xc, yc;
+	do {
+		clique = false;
+		displayText(x, y, "ChoixJoueur1");
+		Bouton randomIAButtonP1 = Bouton(x + pasX, y, "Choix ia aléatoire");
+		Bouton goodIAButtonP1 = Bouton(x + pasX * 2, y, "Choix ia moyenne");
+		Bouton humanPlayerButtonP1 = Bouton(x + pasX * 3, y, "Choix joueur humain");
+
+		randomIAButtonP1.afficher();
+		goodIAButtonP1.afficher();
+		humanPlayerButtonP1.afficher();
+
+		displayText(x, y + pasY, "ChoixJoueur2");
+		Bouton randomIAButtonP2 = Bouton(x + pasX, y + pasY, "Choix ia aléatoire");
+		Bouton goodIAButtonP2 = Bouton(x + pasX * 2, y + pasY, "Choix ia moyenne");
+		Bouton humanPlayerButtonP2 = Bouton(x + pasX * 3, y + pasY, "Choix joueur humain");
+
+		randomIAButtonP2.afficher();
+		goodIAButtonP2.afficher();
+		humanPlayerButtonP2.afficher();
+
+		Bouton jouer = Bouton(x + pasX * 2, y + pasY * 2, "Jouer");
+		jouer.afficher();
+
+
+		switch (choixJoueur1) {
+		case RANDOM_IA:
+			displayText(x+pasX*5, y, "Choix actuelle : Random IA");
+			break;
+		case GOOD_IA:
+			displayText(x + pasX * 5, y, "Choix actuelle : Good IA");
+			break;
+		case HUMAN_PLAYER:
+			displayText(x + pasX * 5, y, "Choix actuelle :Joueur Humain ");
+			break;
+		}
+
+		switch (choixJoueur2) {
+		case RANDOM_IA:
+			displayText(x + pasX * 5, y+pasY, "Choix actuelle :Random IA ");
+			break;
+		case GOOD_IA:
+			displayText(x + pasX * 5, y + pasY, "Choix actuelle :Good IA ");
+			break;
+		case HUMAN_PLAYER:
+			displayText(x + pasX * 5, y + pasY, "Choix actuelle :Joueur Humain");
+			break;
+		}
+
+
+
+		do {
+			while (!ismouseclick(WM_LBUTTONDOWN)) {
+				delay(DELAY);
+			}
+
+			getmouseclick(WM_LBUTTONDOWN, xc, yc);
+			if (jouer.comprendLesCoord(xc, yc)) { choixFait = true;clique = true; }
+			else if (randomIAButtonP1.comprendLesCoord(xc, yc)) {
+				clique = true;
+				choixJoueur1 = RANDOM_IA;
+			}
+			else if (goodIAButtonP1.comprendLesCoord(xc, yc)) {
+				clique = true;
+				choixJoueur1 = GOOD_IA;
+			}
+			else if (humanPlayerButtonP1.comprendLesCoord(xc, yc)) {
+				clique = true;
+				choixJoueur1 = HUMAN_PLAYER;
+			}
+			else if (randomIAButtonP2.comprendLesCoord(xc, yc)) {
+				clique = true;
+				choixJoueur2 = RANDOM_IA;
+			}
+			else if (goodIAButtonP2.comprendLesCoord(xc, yc)) {
+				clique = true;
+				choixJoueur2 = GOOD_IA;
+			}
+			else if (humanPlayerButtonP2.comprendLesCoord(xc, yc)) {
+				clique = true;
+				choixJoueur2 = HUMAN_PLAYER;
+			}
+		} while (!clique);
+		cleardevice();
+	} while (!choixFait);
+
+	//wee need to give the choice informations
+
+	redraw();
+}
 //ajouter getter des bouton
+int Canvas::buttonWhoIsCliked(int x, int y)const {
+	int index = -1;
+
+	for (int i = 0;i < _buttons.size();i++) {
+		if (_buttons[i].comprendLesCoord(x, y)) {
+			index = i;
+		}
+	}
+	return index;
+}
 //fonction renvoyer id bouton cliquer
 Canvas::~Canvas()
 {
@@ -60,7 +175,10 @@ void Canvas::drawBoard() const
 {
 	setfillstyle(1, LIGHTGRAY);
 	setcolor(BLACK);
-	int Tab[8] = { 100,200,100+_board->getCols()*100,200,100 + _board->getCols() * 100,200 + _board->getRows() * 100,100,200+ _board->getRows() *100 };
+	int baseX = 100;
+	int baseY = 200;
+	int baseWidth = 100;
+	int Tab[8] = { baseX,baseY,baseX+_board->getCols()*baseWidth,baseY,baseX + _board->getCols() * baseWidth,baseY + _board->getRows() * baseWidth,baseX,baseY+ _board->getRows() *baseWidth };
 	fillpoly(4, Tab);
 	for (int i = 0;i < _board->getCols();i++) {
 		for (int j = 0;j < _board->getRows();j++) {

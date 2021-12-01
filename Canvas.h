@@ -11,6 +11,8 @@ class Canvas
 public:
 	Canvas();
 	Canvas(Board& board);
+	void drawMenu() const;
+	int buttonWhoIsCliked(int x, int y)const;
 	~Canvas();
 	Board* getBoard() const;
 	const Bouton& operator[](std::size_t idx) const { return _buttons[idx]; }
