@@ -31,6 +31,7 @@ void RandomPlayer::playTurn()
 	} while (!_board->addDisc(col));
 
 	_lastColPlayed = col;
+	std::cout << "random ai played at " << col << endl;
 }
 
 string RandomPlayer::hello() const

@@ -77,6 +77,7 @@ bool Board::checkVerticalLine(int col, int row)
 	{
 		_winner = playedColor;
 		return true;
+		std::cout << "vertical line !";
 	}
 
 	else return false;
@@ -134,7 +135,7 @@ bool Board::checkDiagonals(int col, int row)
 	// Second diagonal
 	connectedTokens = 0;
 	k = 0;
-	while (col - k >= 0 && row + k < _rows && _board[col + k][row - k] == playedColor)
+	while (col - k >= 0 && row + k < _rows && _board[col - k][row + k] == playedColor)
 	{
 		++connectedTokens;
 		++k;
@@ -158,13 +159,13 @@ bool Board::checkDiagonals(int col, int row)
 
 bool Board::checkConnect(int col)
 {
-	int row = _discHeights[col];
+	int row = _discHeights[col]-1;
 	return (checkVerticalLine(col, row) || checkHorizontalLine(col, row) || checkDiagonals(col, row));
 }
 
 bool Board::addDisc(int col)
 {
-	if (!isFilled(col)) {
+	if (col>=0 && col<_cols && !isFilled(col)) {
 		_board[col][_discHeights[col]] = _nextPlayer;
 		++_discHeights[col];
 		if (_nextPlayer == PLAYER_1) _nextPlayer = PLAYER_2;

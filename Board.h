@@ -1,7 +1,8 @@
 #pragma once
 
 #include <vector>
-
+#include <iostream>
+using std::cout;
 using std::vector;
 
 const int PLAYER_NONE = 0;
