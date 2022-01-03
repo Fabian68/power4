@@ -12,6 +12,7 @@ public:
 	Canvas();
 	Canvas(Board& board);
 	void drawMenu(int& choixJoueur1, int& choixJoueur2) const;
+	int humanTurn()const;
 	int buttonWhoIsCliked(int x, int y)const;
 	~Canvas();
 	Board* getBoard() const;

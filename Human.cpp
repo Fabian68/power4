@@ -6,8 +6,9 @@ Human::Human() : Player{}
 	std::cout << hello();
 }
 
-Human::Human(Board* board): Player{board}
+Human::Human(Board* board,Canvas * C): Player{board}
 {
+	_canvas = C;
 }
 
 Human::~Human()
@@ -18,13 +19,12 @@ Human::~Human()
 void Human::playTurn()
 {
 	// Console (temporary)
-	cout << "Column ? : ";
-	int col;
-	cin >> col;
+	_canvas->redraw();
+	
+	int col = _canvas->humanTurn();
 	while (!_board->addDisc(col))
 	{
-		cout << "Already filled, column ? : ";
-		cin >> col;
+		col = _canvas->humanTurn();
 	}
 	
 	_lastColPlayed = col;

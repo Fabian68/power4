@@ -128,6 +128,21 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 		//cleardevice();
 	} while (!choixFait);
 }
+
+int Canvas::humanTurn()const {
+	int DELAY = 50;
+	int xc, yc;
+	int index;
+	do {
+		while (!ismouseclick(WM_LBUTTONDOWN)) {
+			delay(DELAY);
+		}
+		
+	getmouseclick(WM_LBUTTONDOWN, xc, yc);
+	index = buttonWhoIsCliked(xc,yc);
+	} while (index<0);
+	return index;
+}
 //ajouter getter des bouton
 int Canvas::buttonWhoIsCliked(int x, int y)const {
 	int index = -1;

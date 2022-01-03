@@ -14,8 +14,10 @@ Connect4::Connect4() : _board{}, _canvas{ _board }, _p1{ nullptr }, _p2{ nullptr
 	_p2 = createPlayer(RANDOM_PLAYER);
 }
 
-Connect4::Connect4(int cols, int rows, int connectedTokensToWin) : _board{ cols,rows,connectedTokensToWin }, _canvas{ _board },_p1{ nullptr }, _p2{ nullptr }
+Connect4::Connect4(int cols, int rows, int connectedTokensToWin) : _p1{ nullptr }, _p2{ nullptr }
 {
+	_board = Board(cols, rows, connectedTokensToWin);
+	_canvas = Canvas(_board);
 	int p1Type, p2Type;
 	_canvas.drawMenu(p1Type,p2Type);
 	_p1 = createPlayer(p1Type);
