@@ -49,7 +49,7 @@ int Board::getValue(int col, int row) const
 
 bool Board::isFilled(int col) const
 {
-	return _rows <= (_discHeights[col]);
+	return _discHeights[col] >= _rows;
 }
 
 bool Board::allFilled() const

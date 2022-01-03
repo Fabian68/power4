@@ -38,8 +38,8 @@ public:
 
 	bool isThereAWinner() const;
 
-	int getValue(int columnNuumber, int lineNumber) const; //testing purpose
-	bool isFilled(int columnNumber) const;
+	int getValue(int col, int row) const; //testing purpose
+	bool isFilled(int col) const;
 	bool allFilled() const;
 
 	// Check winning lines for the last play

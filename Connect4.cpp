@@ -30,30 +30,27 @@ Connect4::~Connect4()
 	delete _p2;
 }
 
-Player* Connect4::createPlayer(int playerType) const
+Player* Connect4::createPlayer(int playerType)
 {
 	switch (playerType)
 	{
 		case HUMAN_PLAYER:
-			return new Human();
+			return new Human(&_board);
 			break;
 		case AI_PLAYER:
-			return new AI();
+			return new AI(&_board);
 			break;
 		default :
-			return new RandomPlayer();
+			return new RandomPlayer(&_board);
 			break;
 	}
 }
 
 void Connect4::play()
 {
-	
-
+	_canvas.redraw();
 	while (!_board.isThereAWinner() && !_board.allFilled())
 	{
-		_canvas.redraw();
-		//need to draw the buttons and let the choice if human player TODO
 		// Current player plays its turn
 		int colPlayed;
 		if (_board.getNextPlayer() == PLAYER_1) {
@@ -64,11 +61,12 @@ void Connect4::play()
 			_p2->playTurn();
 			colPlayed = _p2->getLastColPlayed();
 		}
+		_canvas.redraw();
 
 		// Update the winner
 		_board.checkConnect(colPlayed);
 	}
-	_canvas.redraw();
+
 	displayWinner();
 	replay();
 }

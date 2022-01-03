@@ -27,14 +27,21 @@ Canvas::Canvas(Board& board): _board{&board}
 
 }
 
+Canvas::~Canvas()
+{
+	_board = nullptr;
+}
+
+
+Board* Canvas::getBoard() const
+{
+	return _board;
+}
+
 void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 
-	const int RANDOM_IA=1;
-	const int GOOD_IA = 2;
-	const int HUMAN_PLAYER = 0;
-
-	choixJoueur1=RANDOM_IA;
-	choixJoueur2=RANDOM_IA;
+	choixJoueur1= RANDOM_PLAYER;
+	choixJoueur2= RANDOM_PLAYER;
 	int x = 100;
 	int y = 200;
 	int pasY = 100;
@@ -68,10 +75,10 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 
 
 		switch (choixJoueur1) {
-		case RANDOM_IA:
+		case RANDOM_PLAYER:
 			displayText(x+pasX*5, y, "Choix actuelle : Random IA");
 			break;
-		case GOOD_IA:
+		case GOOD_AI_PLAYER:
 			displayText(x + pasX * 5, y, "Choix actuelle : Good IA");
 			break;
 		case HUMAN_PLAYER:
@@ -80,18 +87,16 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 		}
 
 		switch (choixJoueur2) {
-		case RANDOM_IA:
+		case RANDOM_PLAYER:
 			displayText(x + pasX * 5, y+pasY, "Choix actuelle :Random IA ");
 			break;
-		case GOOD_IA:
+		case GOOD_AI_PLAYER:
 			displayText(x + pasX * 5, y + pasY, "Choix actuelle :Good IA ");
 			break;
 		case HUMAN_PLAYER:
 			displayText(x + pasX * 5, y + pasY, "Choix actuelle :Joueur Humain");
 			break;
 		}
-
-
 
 		do {
 			while (!ismouseclick(WM_LBUTTONDOWN)) {
@@ -102,11 +107,11 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 			if (jouer.comprendLesCoord(xc, yc)) { choixFait = true;clique = true; }
 			else if (randomIAButtonP1.comprendLesCoord(xc, yc)) {
 				clique = true;
-				choixJoueur1 = RANDOM_IA;
+				choixJoueur1 = RANDOM_PLAYER;
 			}
 			else if (goodIAButtonP1.comprendLesCoord(xc, yc)) {
 				clique = true;
-				choixJoueur1 = GOOD_IA;
+				choixJoueur1 = GOOD_AI_PLAYER;
 			}
 			else if (humanPlayerButtonP1.comprendLesCoord(xc, yc)) {
 				clique = true;
@@ -114,11 +119,11 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 			}
 			else if (randomIAButtonP2.comprendLesCoord(xc, yc)) {
 				clique = true;
-				choixJoueur2 = RANDOM_IA;
+				choixJoueur2 = RANDOM_PLAYER;
 			}
 			else if (goodIAButtonP2.comprendLesCoord(xc, yc)) {
 				clique = true;
-				choixJoueur2 = GOOD_IA;
+				choixJoueur2 = GOOD_AI_PLAYER;
 			}
 			else if (humanPlayerButtonP2.comprendLesCoord(xc, yc)) {
 				clique = true;
@@ -128,8 +133,9 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 		//cleardevice();
 	} while (!choixFait);
 }
-//ajouter getter des bouton
-int Canvas::buttonWhoIsCliked(int x, int y)const {
+
+// return the button id which is clicked
+int Canvas::buttonNumberClicked(int x, int y)const {
 	int index = -1;
 
 	for (int i = 0;i < _buttons.size();i++) {
@@ -139,18 +145,8 @@ int Canvas::buttonWhoIsCliked(int x, int y)const {
 	}
 	return index;
 }
-//fonction renvoyer id bouton cliquer
-Canvas::~Canvas()
-{
-	_board = nullptr;
-}
 
-Board* Canvas::getBoard() const
-{
-	return _board;
-}
-
-// Draw all the canvas elements
+// Draw all canvas elements
 void Canvas::redraw() const
 {
 	cleardevice();
@@ -179,7 +175,9 @@ void Canvas::drawBoard() const
 	fillpoly(4, Tab);
 	for (int i = 0;i < _board->getCols();i++) {
 		for (int j = 0;j < _board->getRows();j++) {
-			drawDisc(i, j, WHITE);
+			if(_board->getValue(i,j) == PLAYER_1) drawDisc(i, j, RED);
+			else if(_board->getValue(i, j) == PLAYER_2) drawDisc(i, j, GREEN);
+			else drawDisc(i, j, WHITE);
 		}
 	}
 }

@@ -8,6 +8,7 @@ class Player;
 const int HUMAN_PLAYER = 0;
 const int RANDOM_PLAYER = 1;
 const int AI_PLAYER = 2;
+const int GOOD_AI_PLAYER = 3;
 
 class Connect4 {
 
@@ -22,7 +23,7 @@ private:
 	Player* _p1, *_p2;
 
 	// Create (return) a random player by default
-	Player* createPlayer(int playerType) const;
+	Player* createPlayer(int playerType);
 
 
 public:
