@@ -57,7 +57,7 @@ TEST_CASE("Testing the board") {
     CHECK_EQ(b.isFilled(0), true);
 }
 
-TEST_CASE("Tesing the canvas") {
+TEST_CASE("Testing the canvas") {
     Board b = Board{};
     Canvas v = Canvas{ b };
 
@@ -75,10 +75,10 @@ TEST_CASE("Tesing the canvas") {
   
 }
 
-TEST_CASE("Tesing the canvas") {
+TEST_CASE("Tesing the game") {
     Board b = Board{};
     Canvas v = Canvas{ b };
-    Connect4 C = Connect4(6, 7, 4);
+    Connect4 C = Connect4(7, 6, 4);
 
     while (!kbhit())
     {

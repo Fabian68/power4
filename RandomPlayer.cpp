@@ -23,16 +23,15 @@ RandomPlayer::~RandomPlayer()
 
 void RandomPlayer::playTurn()
 {
-	bool played = false;
 	int cols = _board->getCols();
 	int col;
 	do
 	{
 		col = rand() % cols;
-		played = _board->addDisc(col);
-	} while (!played);
+	} while (!_board->addDisc(col));
 
 	_lastColPlayed = col;
+	std::cout << "random ai played at " << col << endl;
 }
 
 string RandomPlayer::hello() const

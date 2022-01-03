@@ -8,7 +8,7 @@ class Board;
 class AI : public Player
 {
 private :
-
+	const int MINMAX_DEPTH = 7;
 
 public:
 	AI();
@@ -16,6 +16,8 @@ public:
 	~AI();
 
 	// Plays by itself with calcul
+	int minmax(int depth);
+	int eval();
 	virtual void playTurn() override;
 
 	virtual string hello() const override;
