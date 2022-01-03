@@ -70,7 +70,8 @@ void Connect4::play()
 	}
 
 	displayWinner();
-	replay();
+	//Luca c'est bugué ton truc tu checkera sa
+	//replay();
 }
 
 void Connect4::displayWinner()

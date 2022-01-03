@@ -105,7 +105,16 @@ bool Board::checkHorizontalLine(int col, int row)
 	else return false;
 }
 
-
+bool Board::inBound(int col, int row)const {
+	bool inBound = true;
+	if (col < 0 || col >= _cols) {
+		inBound = false;
+	}
+	else if (row < 0 || row >= _rows) {
+		inBound = false;
+	}
+	return inBound;
+}
 bool Board::checkDiagonals(int col, int row)
 {
 	int playedColor = _board[col][row];

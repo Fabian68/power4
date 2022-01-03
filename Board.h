@@ -45,6 +45,7 @@ public:
 
 	// Check winning lines for the last play
 	bool checkVerticalLine(int col, int row) ;
+	bool inBound(int col, int row) const;
 	bool checkHorizontalLine(int col, int row) ;
 	bool checkDiagonals(int col, int row) ;
 	bool checkConnect(int col);
