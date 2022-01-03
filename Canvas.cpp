@@ -24,21 +24,17 @@ Canvas::Canvas(Board& board): _board{&board}
 		setcolor(RED);
 		_buttons[i] = Bouton{ i * 100 + 100, 150, "        ", RED, WHITE, WHITE };
 	}
-	drawMenu();
-	//redraw();
-	
-	
-	//cleardevice(); pour nettoyer l'ecran
+
 }
 
-void Canvas::drawMenu()const {
+void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 
 	const int RANDOM_IA=1;
 	const int GOOD_IA = 2;
 	const int HUMAN_PLAYER = 0;
 
-	int choixJoueur1=RANDOM_IA;
-	int choixJoueur2=RANDOM_IA;
+	choixJoueur1=RANDOM_IA;
+	choixJoueur2=RANDOM_IA;
 	int x = 100;
 	int y = 200;
 	int pasY = 100;
@@ -131,13 +127,6 @@ void Canvas::drawMenu()const {
 		} while (!clique);
 		//cleardevice();
 	} while (!choixFait);
-
-	std::cout << "check" << std::endl;
-	Connect4 game = Connect4(6, 7, 4, choixJoueur1, choixJoueur2);
-	game.play();
-	//wee need to give the choice informations
-
-	redraw();
 }
 //ajouter getter des bouton
 int Canvas::buttonWhoIsCliked(int x, int y)const {
@@ -164,6 +153,7 @@ Board* Canvas::getBoard() const
 // Draw all the canvas elements
 void Canvas::redraw() const
 {
+	cleardevice();
 	displayText(700, 20, "Tour du joueur : ");
 	drawButtons();
 	drawBoard();

@@ -27,7 +27,7 @@ private:
 
 public:
 	Connect4();
-	Connect4(int cols, int rows, int connectedTokensToWin, int p1Type, int p2Type);
+	Connect4(int cols, int rows, int connectedTokensToWin);
 	~Connect4();
 
 

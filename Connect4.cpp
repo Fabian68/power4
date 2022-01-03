@@ -14,10 +14,14 @@ Connect4::Connect4() : _board{}, _canvas{ _board }, _p1{ nullptr }, _p2{ nullptr
 	_p2 = createPlayer(RANDOM_PLAYER);
 }
 
-Connect4::Connect4(int cols, int rows, int connectedTokensToWin, int p1Type, int p2Type) : _board{ cols,rows,connectedTokensToWin }, _canvas{ _board },_p1{ nullptr }, _p2{ nullptr }
+Connect4::Connect4(int cols, int rows, int connectedTokensToWin) : _board{ cols,rows,connectedTokensToWin }, _canvas{ _board },_p1{ nullptr }, _p2{ nullptr }
 {
+	int p1Type, p2Type;
+	_canvas.drawMenu(p1Type,p2Type);
 	_p1 = createPlayer(p1Type);
 	_p2 = createPlayer(p2Type);
+
+	play();
 }
 
 Connect4::~Connect4()
@@ -44,8 +48,12 @@ Player* Connect4::createPlayer(int playerType) const
 
 void Connect4::play()
 {
+	
+
 	while (!_board.isThereAWinner() && !_board.allFilled())
 	{
+		_canvas.redraw();
+		//need to draw the buttons and let the choice if human player TODO
 		// Current player plays its turn
 		int colPlayed;
 		if (_board.getNextPlayer() == PLAYER_1) {
@@ -60,7 +68,7 @@ void Connect4::play()
 		// Update the winner
 		_board.checkConnect(colPlayed);
 	}
-
+	_canvas.redraw();
 	displayWinner();
 	replay();
 }
