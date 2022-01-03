@@ -2,6 +2,8 @@
 #include "graphics.h"
 #include "Board.h"
 #include "Bouton.h"
+#include "Connect4.h"
+#include <iostream>
 
 Canvas::Canvas()
 {
@@ -30,9 +32,11 @@ Canvas::Canvas(Board& board): _board{&board}
 }
 
 void Canvas::drawMenu()const {
-	const int RANDOM_IA=0;
-	const int GOOD_IA = 1;
-	const int HUMAN_PLAYER = 2;
+
+	const int RANDOM_IA=1;
+	const int GOOD_IA = 2;
+	const int HUMAN_PLAYER = 0;
+
 	int choixJoueur1=RANDOM_IA;
 	int choixJoueur2=RANDOM_IA;
 	int x = 100;
@@ -40,7 +44,7 @@ void Canvas::drawMenu()const {
 	int pasY = 100;
 	int pasX = 150;
 	bool choixFait=false;
-	boolean clique;
+	bool clique;
 	int DELAY = 50;
 	int xc, yc;
 	do {
@@ -125,9 +129,12 @@ void Canvas::drawMenu()const {
 				choixJoueur2 = HUMAN_PLAYER;
 			}
 		} while (!clique);
-		cleardevice();
+		//cleardevice();
 	} while (!choixFait);
 
+	std::cout << "check" << std::endl;
+	Connect4 game = Connect4(6, 7, 4, choixJoueur1, choixJoueur2);
+	game.play();
 	//wee need to give the choice informations
 
 	redraw();
