@@ -4,7 +4,6 @@
 #include "Board.h"
 #include <ctime>
 #include <cstdlib>
-//#include <stdio.h>
 
 RandomPlayer::RandomPlayer() : Player{}
 {

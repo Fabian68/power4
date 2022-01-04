@@ -21,6 +21,7 @@ private :
 	};
 
 	const int MINMAX_DEPTH = 7;
+	const int EPSILON = 5;
 	int _playerNum;
 	vector<PossiblePath> _allPaths;
 

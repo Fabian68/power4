@@ -2,6 +2,8 @@
 #include "Board.h"
 #include <climits>
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 
 AI::AI() : Player{}
 {
@@ -90,22 +92,37 @@ void AI::playTurn()
 {
     _playerNum = _board->getNextPlayer();
 
-	// copy of board to compute and played cols for each turn
-	Board b = Board{*_board};
-	vector<int> playedCols(MINMAX_DEPTH, -1);
+	int col;
 
-	// minmax launched
-	int bestScore = minmax(b,0,playedCols);
+	// if does not play randomly, compute next plays
+	if (rand() % 101 > EPSILON)
+	{
+		// copy of board to compute and played cols for each turn
+		Board b = Board{ *_board };
+		vector<int> playedCols(MINMAX_DEPTH, -1);
 
-	// searching played cols for best score
-	int path = 0;
-	while (path < _allPaths.size() && _allPaths[path]._score != bestScore)
-		++path;
+		// minmax launched
+		int bestScore = minmax(b, 0, playedCols);
 
-	// plays
-	int col = _allPaths[path]._playedCols[0];
+		// searching played cols for best score
+		int path = 0;
+		while (path < _allPaths.size() && _allPaths[path]._score != bestScore)
+			++path;
 
-	_board->addDisc(col);
+		// plays
+		int col = _allPaths[path]._playedCols[0];
+		_board->addDisc(col);
+	}
+
+	else
+	{
+		int cols = _board->getCols();
+		do
+		{
+			col = rand() % cols;
+		} while (!_board->addDisc(col));
+	}
+
 	_lastColPlayed = col;
 }
 
