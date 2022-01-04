@@ -1,5 +1,15 @@
 #include "Board.h"
 
+vector<vector<int>> Board::getBoard() const
+{
+	return vector<vector<int>>();
+}
+
+vector<int> Board::getDiscHeights() const
+{
+	return vector<int>();
+}
+
 // Init params and board with the empty value, num of player and none winner 
 Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{cols}, _rows{rows}, _connectedTokensToWin{connectedTokensToWin},
 	_winner{PLAYER_NONE}, _nextPlayer{PLAYER_1}
@@ -11,6 +21,10 @@ Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{cols}, _rows{
 		_board[i].resize(rows, PLAYER_NONE);
 	}
 }
+
+Board::Board(const Board& b): _cols{b.getCols()}, _rows{b.getRows()}, _connectedTokensToWin{b.getConnectedTokensToWin()},
+	_winner{b.getWinner()}, _nextPlayer{b.getNextPlayer()}, _board{b.getBoard()}, _discHeights{b.getDiscHeights()}
+{}
 
 int Board::getCols() const
 {
@@ -50,6 +64,11 @@ bool Board::isThereAWinner() const
 int Board::getValue(int col, int row) const
 {
 	return _board[col][row];
+}
+
+int Board::getLastValue(int col) const
+{
+	return getValue(col, getHeight(col) - 1);
 }
 
 bool Board::isFilled(int col) const

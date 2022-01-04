@@ -26,9 +26,13 @@ private:
 	int _nextPlayer;
 	int _connectedTokensToWin;
 
+	vector<vector<int>> getBoard() const;
+	vector<int> getDiscHeights() const;
+
 public:
 	// L'affichage devra se faire a l'envers pour correspondre 
 	Board(int cols=7, int rows=6, int connectedTokensToWin=4);
+	Board(const Board& b);
 
 	// getters
 	int getCols() const;
@@ -41,6 +45,7 @@ public:
 	bool isThereAWinner() const;
 
 	int getValue(int col, int row) const; //testing purpose
+	int getLastValue(int col) const;
 	bool isFilled(int col) const;
 	bool allFilled() const;
 
