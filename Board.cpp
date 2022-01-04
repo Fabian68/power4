@@ -193,6 +193,8 @@ bool Board::checkDiagonals(int col, int row)
 
 bool Board::checkConnect(int col)
 {
+	if (col < 0 || col >= _cols)
+		return false;
 	int row = _discHeights[col]-1;
 	return (checkVerticalLine(col, row) || checkHorizontalLine(col, row) || checkDiagonals(col, row));
 }

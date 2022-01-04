@@ -8,7 +8,7 @@ AI::AI() : Player{}
 	std::cout << hello();
 }
 
-AI::AI(Board* board): Player{board}
+AI::AI(Board* board): Player{board}, _allPaths(0)
 {
 
 }
@@ -18,11 +18,22 @@ AI::~AI()
 	_board = nullptr;
 }
 
+AI::PossiblePath::PossiblePath(const vector<int>& playedCols, int score): _playedCols{playedCols}, _score{score}
+{}
+
+AI::PossiblePath::PossiblePath()
+{}
+
+
 int AI::minmax(Board& b, int depth, const vector<int>& playedCols)
 {
 	// if max depth or a player can win, evaluate
-	if (depth == MINMAX_DEPTH || b.checkConnect(playedCols.back()))
-		return evaluation(depth);
+	if (depth == MINMAX_DEPTH || (playedCols.size()>0 && b.checkConnect(playedCols.back())))
+	{
+		int eval = evaluation(b,depth);
+		_allPaths.push_back(PossiblePath(playedCols,eval));
+		return eval;
+	}	
 
 	// otherwise, if this AI must play find best evaluation
 	if (b.getNextPlayer() == _playerNum)
@@ -30,11 +41,16 @@ int AI::minmax(Board& b, int depth, const vector<int>& playedCols)
 		int maxEval = INT_MIN;
 		for (int i = 0; i < b.getCols(); i++)
 		{
-			// todo jouer
-
-			int eval = minmax(b, depth + 1, playedCols);
-			return std::max(maxEval, eval);
+			Board nextB = Board{ b };
+			vector<int> nextPlayedCols(playedCols);
+			if (nextB.addDisc(i))
+			{
+				nextPlayedCols.push_back(i);
+				int eval = minmax(nextB, depth + 1, nextPlayedCols);
+				maxEval = std::max(maxEval, eval);
+			}
 		}
+		return maxEval;
 	}
 
 	// or if this is the other player turn, find worst evaluation
@@ -43,33 +59,52 @@ int AI::minmax(Board& b, int depth, const vector<int>& playedCols)
 		int minEval = INT_MAX;
 		for (int i = 0; i < b.getCols(); i++)
 		{
-			// todo jouer
+			Board nextB = Board{ b };
+			vector<int> nextPlayedCols(playedCols);
 
-			int eval = minmax(b, depth + 1, playedCols);
-			return std::min(minEval, eval);
+			if (nextB.addDisc(i))
+			{
+				nextPlayedCols.push_back(i);
+				int eval = minmax(nextB, depth + 1, nextPlayedCols);
+				minEval = std::min(minEval, eval);
+			}
 		}
+		return minEval;
 	}
 }
 
-int AI::evaluation(int depth)
+int AI::evaluation(const Board& b, int depth)
 {
-	int winner = _board->getWinner();
+	int winner = b.getWinner();
 
-    if (winner == _playerNum) 
-		return 1000-depth;
+	if (winner == _playerNum)
+		return 1000 - depth;
 
 	else if (winner != PLAYER_NONE)
 		return depth - 1000;
 
-    else return 0;
+	else return 0;
 }
 
 void AI::playTurn()
 {
     _playerNum = _board->getNextPlayer();
+
+	// copy of board to compute and played cols for each turn
 	Board b = Board{*_board};
-	vector<int> playedCols(0);
-	int col = minmax(b,0,playedCols);
+	vector<int> playedCols(MINMAX_DEPTH, -1);
+
+	// minmax launched
+	int bestScore = minmax(b,0,playedCols);
+
+	// searching played cols for best score
+	int path = 0;
+	while (path < _allPaths.size() && _allPaths[path]._score != bestScore)
+		++path;
+
+	// plays
+	int col = _allPaths[path]._playedCols[0];
+
 	_board->addDisc(col);
 	_lastColPlayed = col;
 }
