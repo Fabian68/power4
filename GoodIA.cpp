@@ -7,7 +7,7 @@ GoodIA::GoodIA() : Player{}
 {
 }
 
-GoodIA::GoodIA(Board* board) : Player { board }
+GoodIA::GoodIA(Board* board,int playerId,int secondPlayerId) : Player { board }, _playerId{playerId}, _secondPlayerId{ secondPlayerId }
 {
 }
 
@@ -18,26 +18,300 @@ GoodIA::~GoodIA()
 
 void GoodIA::playTurn()
 {
-	bool played = false;
+	//bool played = false;
 	int cols = _board->getCols();
 	
-	int col;
+
 
 	std::vector<int> indexOfPlayableColumn;
 
-	//check winable column
+	int col = 0;
+	int row;
+	while (col < cols) {
+		row = _board->getHeight(col);
+		if (checkAlllinesPossible(col,row,_playerId)) {
+			indexOfPlayableColumn.push_back(col);
+		}
+		/*
+		if (checkAllColumnPossible(col, row, _playerId)) {
+			indexOfPlayableColumn.push_back(col);
+		}
+		if (checkAllLeftDiagonalPossible(col, row, _playerId)) {
+			indexOfPlayableColumn.push_back(col);
+		}
+		if (checkAllRightDiagonalPossible(col, row, _playerId)) {
+			indexOfPlayableColumn.push_back(col);
+		}*/
+		col++;
+	}
+	col = 0;
+	if (indexOfPlayableColumn.size() == 0) {
+		while (col < cols) {
+			row = _board->getHeight(col);
+			if (checkAlllinesPossible(col, row, _secondPlayerId)) {
+				indexOfPlayableColumn.push_back(col);
+			}/*
+			if (checkAllColumnPossible(col, row, _secondPlayerId)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId)) {
+				indexOfPlayableColumn.push_back(col);
+			}*/
+			col++;
+		}
+	}
+	col = 0;
+	if (indexOfPlayableColumn.size() == 0) {
+		while (col < cols) {
+			row = _board->getHeight(col);
+			if (checkAlllinesPossible(col, row, _playerId,2)) {
+				indexOfPlayableColumn.push_back(col);
+			}/*
+			if (checkAllColumnPossible(col, row, _playerId,2)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllLeftDiagonalPossible(col, row, _playerId,2)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllRightDiagonalPossible(col, row, _playerId,2)) {
+				indexOfPlayableColumn.push_back(col);
+			}*/
+			col++;
+		}
+	}
+	col = 0;
+	if (indexOfPlayableColumn.size() == 0) {
+		while (col < cols) {
+			row = _board->getHeight(col);
+			if (checkAlllinesPossible(col, row, _secondPlayerId,2)) {
+				indexOfPlayableColumn.push_back(col);
+			}/*
+			if (checkAllColumnPossible(col, row, _secondPlayerId,2)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId,2)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId,2)) {
+				indexOfPlayableColumn.push_back(col);
+			}*/
+			col++;
+		}
+	}
+	col = 0;
+	if (indexOfPlayableColumn.size() == 0) {
+		while (col < cols) {
+			row = _board->getHeight(col);
+			if (checkAlllinesPossible(col, row, _playerId, 3)) {
+				indexOfPlayableColumn.push_back(col);
+			}/*
+			if (checkAllColumnPossible(col, row, _playerId, 3)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllLeftDiagonalPossible(col, row, _playerId, 3)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllRightDiagonalPossible(col, row, _playerId, 3)) {
+				indexOfPlayableColumn.push_back(col);
+			}*/
+			col++;
+		}
+	}
+	col = 0;
+	if (indexOfPlayableColumn.size() == 0) {
+		while (col < cols) {
+			row = _board->getHeight(col);
+			if (checkAlllinesPossible(col, row, _secondPlayerId, 3)) {
+				indexOfPlayableColumn.push_back(col);
+			}/*
+			if (checkAllColumnPossible(col, row, _secondPlayerId, 3)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId, 3)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId, 3)) {
+				indexOfPlayableColumn.push_back(col);
+			}*/
+			col++;
+		}
+	}
 
-	//if result =0 check winable column for the second player in order to block him
+	int playedCol;
+	std::cout << indexOfPlayableColumn.size() << std::endl;
+	if (indexOfPlayableColumn.size() == 0) {
+		do
+		{
+			playedCol = rand() % cols;
+		} while (!_board->addDisc(playedCol));
+	}
+	else {
+		playedCol = indexOfPlayableColumn[0];
+		_board->addDisc(playedCol);
+	}
 
-	//check line of 3 and 2 ( can be more if we need more than 4 coin for win)
-
-	//if still no result block lines of 3 and 2 of second player
-
-	//if still nothing just choose a random column
-
-	_lastColPlayed = col;
+	_lastColPlayed = playedCol;
 }
 
+/*
+This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
+*/
+bool GoodIA::linePossible(int beginCol, int beginRow,int playerId, int freeSpace , int size )const {
+	bool possible = true;
+	if (_board->inBound(beginCol,beginRow) && _board->inBound(beginCol+size-1, beginRow)) {
+		for (int col = beginCol;col < beginCol + size;col++) {
+			if (_board->getValue(col, beginRow) != playerId && _board->getValue(col, beginRow) != PLAYER_NONE) {
+				possible=false;
+			}
+			else if (_board->getValue(col, beginRow) == PLAYER_NONE) {
+				freeSpace--;
+			}
+		}
+		if (freeSpace == 0) {
+			possible = true;
+		}
+	}
+	else {
+		possible = false;
+	}
+	return possible;
+}
+
+
+/*
+This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
+*/
+bool GoodIA::checkAlllinesPossible(int  col, int  row, int playerId, int freeSpace , int size )const {
+	bool possible = false;
+
+	for (int c = col; c >= 0;c--) {
+		if (linePossible(c, row, playerId, freeSpace, size)) {
+			possible =true;
+		
+		}
+	}
+	return possible;
+}
+
+/*
+Same as line but for column
+*/
+bool GoodIA::columnPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
+	bool possible = true;
+	if (_board->inBound(beginCol, beginRow) && _board->inBound(beginCol, beginRow+size -1)) {
+		for (int row = beginRow;row < beginRow + size;row++) {
+			if (_board->getValue(beginCol, row) != playerId && _board->getValue(beginCol, row) != PLAYER_NONE) {
+				possible = false;
+			}
+			else if (_board->getValue(beginCol, row) == PLAYER_NONE) {
+				freeSpace--;
+			}
+		}
+		if (freeSpace == 0) {
+			possible = true;
+		}
+	}
+	else {
+		possible = false;
+	}
+	return possible;
+}
+
+/*
+This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
+*/
+bool GoodIA::checkAllColumnPossible(int col, int row, int playerId, int freeSpace , int size )const {
+	bool possible = false;
+
+	for (int r = row; r >= 0;r--) {
+		if (columnPossible(col, r, playerId, freeSpace, size)) {
+			possible = true;
+		
+		}
+	}
+	return possible;
+}
+
+/*
+Same as line but for column
+*/
+bool GoodIA::leftDiagonalPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
+	bool possible = true;
+	if (_board->inBound(beginCol, beginRow) && _board->inBound(beginCol-size+1, beginRow + size - 1)) {
+		for (int col=beginCol, row = beginRow;col>=0 || row < beginRow + size;col--,row++) {
+			if (_board->getValue(col, row) != playerId && _board->getValue(col, row) != PLAYER_NONE) {
+				possible = false;
+			}
+			else if (_board->getValue(col, row) == PLAYER_NONE) {
+				freeSpace--;
+			}
+		}
+		if (freeSpace == 0) {
+			possible = true;
+		}
+	}
+	else {
+		possible = false;
+	}
+	return possible;
+}
+
+/*
+This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
+*/
+bool GoodIA::checkAllLeftDiagonalPossible(int col, int row, int playerId, int freeSpace , int size )const {
+	bool possible = false;
+
+	for (int c=col,r = row; r >= 0;c++,r--) {
+		if (columnPossible(col, r, playerId, freeSpace, size)) {
+			possible = true;
+			
+		}
+	}
+	return possible;
+}
+
+/*
+Same as line but for column
+*/
+bool GoodIA::rightDiagonalPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
+	bool possible = true;
+	if (_board->inBound(beginCol, beginRow) && _board->inBound(beginCol+size-1, beginRow + size - 1)) {
+		for (int col=beginCol, row = beginRow;col< beginCol + size || row < beginRow + size;col++,row++) {
+			if (_board->getValue(col, row) != playerId && _board->getValue(col, row) != PLAYER_NONE) {
+				possible = false;
+			}
+			else if (_board->getValue(col, row) == PLAYER_NONE) {
+				freeSpace--;
+			}
+		}
+		if (freeSpace == 0) {
+			possible = true;
+		}
+	}
+	else {
+		possible = false;
+	}
+	return possible;
+}
+
+/*
+This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
+*/
+bool GoodIA::checkAllRightDiagonalPossible(int col, int row, int playerId, int freeSpace , int size )const {
+	bool possible = false;
+
+	for (int c = col, r = row; c >= 0 && r >= 0;c--, r--) {
+		if (columnPossible(col, r, playerId, freeSpace, size)) {
+			possible = true;
+			
+		}
+	}
+	return possible;
+}
 string GoodIA::hello() const
 {
 	return string();

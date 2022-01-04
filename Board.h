@@ -36,6 +36,7 @@ public:
 	int getNextPlayer() const;
 	int getWinner() const;
 	int getConnectedTokensToWin() const;
+	int getHeight(int column)const;
 
 	bool isThereAWinner() const;
 

@@ -37,6 +37,11 @@ int Board::getConnectedTokensToWin() const
 	return _connectedTokensToWin;
 }
 
+int Board::getHeight(int column) const
+{
+	return _discHeights[column];
+}
+
 bool Board::isThereAWinner() const
 {
 	return _winner!=PLAYER_NONE;
@@ -174,15 +179,19 @@ bool Board::checkConnect(int col)
 
 bool Board::addDisc(int col)
 {
-	if (col>=0 && col<_cols && !isFilled(col)) {
-		_board[col][_discHeights[col]] = _nextPlayer;
-		++_discHeights[col];
-		if (_nextPlayer == PLAYER_1) _nextPlayer = PLAYER_2;
-		else _nextPlayer = PLAYER_1;
-		return true;
-	}
+	bool possible = false;
+	if (col >= 0 && col < _cols) {
+		if (!isFilled(col)) {
+			_board[col][_discHeights[col]] = _nextPlayer;
+			++_discHeights[col];
+			if (_nextPlayer == PLAYER_1) _nextPlayer = PLAYER_2;
+			else _nextPlayer = PLAYER_1;
 
-	else return false;
+			possible = true;
+		}
+	}
+	
+	 return possible;
 }
 
 // Clear the board and put the empty value everywhere (PLAYER_NONE)
