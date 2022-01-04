@@ -62,7 +62,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GoodIA.cpp" />
+    <ClCompile Include="MediumAI.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RandomPlayer.cpp" />
@@ -92,7 +92,7 @@
     <ClInclude Include="Connect4.h" />
     <ClInclude Include="dibutil.h" />
     <ClInclude Include="doctest.h" />
-    <ClInclude Include="GoodIA.h" />
+    <ClInclude Include="MediumAI.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Player.h" />

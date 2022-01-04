@@ -5,7 +5,7 @@ Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{cols}, _rows{
 	_winner{PLAYER_NONE}, _nextPlayer{PLAYER_1}
 {
 	_board.resize(cols);
-	_discHeights.resize(rows, 0);
+	_discHeights.resize(cols, 0);
 
 	for (int i = 0;i < cols;i++) {
 		_board[i].resize(rows, PLAYER_NONE);
@@ -120,6 +120,7 @@ bool Board::inBound(int col, int row)const {
 	}
 	return inBound;
 }
+
 bool Board::checkDiagonals(int col, int row)
 {
 	int playedColor = _board[col][row];
@@ -179,19 +180,15 @@ bool Board::checkConnect(int col)
 
 bool Board::addDisc(int col)
 {
-	bool possible = false;
-	if (col >= 0 && col < _cols) {
-		if (!isFilled(col)) {
-			_board[col][_discHeights[col]] = _nextPlayer;
-			++_discHeights[col];
-			if (_nextPlayer == PLAYER_1) _nextPlayer = PLAYER_2;
-			else _nextPlayer = PLAYER_1;
-
-			possible = true;
-		}
+	if (col >= 0 && col < _cols && !isFilled(col)) {
+		_board[col][_discHeights[col]] = _nextPlayer;
+		++_discHeights[col];
+		if (_nextPlayer == PLAYER_1) _nextPlayer = PLAYER_2;
+		else _nextPlayer = PLAYER_1;
+		return true;
 	}
-	
-	 return possible;
+
+	else return false;
 }
 
 // Clear the board and put the empty value everywhere (PLAYER_NONE)

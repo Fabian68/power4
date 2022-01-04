@@ -8,7 +8,7 @@ class Player;
 const int HUMAN_PLAYER = 0;
 const int RANDOM_PLAYER = 1;
 const int AI_PLAYER = 2;
-const int GOOD_AI_PLAYER = 3;
+const int MEDIUM_AI_PLAYER = 3;
 
 class Connect4 {
 
@@ -37,6 +37,6 @@ public:
 	// Display the winner on canvas
 	void displayWinner();
 	// Ask for playing one more time
-	void replay();
+	void rematch();
 };
 

@@ -11,7 +11,7 @@ private:
 
 public:
 	Human();
-	Human(Board* board,Canvas * C);
+	Human(Board* board,Canvas* canvas);
 	~Human();
 
 	// Plays by clicking on the screen to put a token in a column

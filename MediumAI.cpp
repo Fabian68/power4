@@ -1,22 +1,22 @@
-#include "GoodIA.h"
+#include "MediumAI.h"
 
 #include "Board.h"
 #include <vector>
 
-GoodIA::GoodIA() : Player{}
+MediumAI::MediumAI() : Player{}
 {
 }
 
-GoodIA::GoodIA(Board* board,int playerId,int secondPlayerId) : Player { board }, _playerId{playerId}, _secondPlayerId{ secondPlayerId }
+MediumAI::MediumAI(Board* board,int playerId,int secondPlayerId) : Player { board }, _playerId{playerId}, _secondPlayerId{ secondPlayerId }
 {
 }
 
-GoodIA::~GoodIA()
+MediumAI::~MediumAI()
 {
 	_board = nullptr;
 }
 
-void GoodIA::playTurn()
+void MediumAI::playTurn()
 {
 	//bool played = false;
 	int cols = _board->getCols();
@@ -159,7 +159,7 @@ void GoodIA::playTurn()
 /*
 This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
 */
-bool GoodIA::linePossible(int beginCol, int beginRow,int playerId, int freeSpace , int size )const {
+bool MediumAI::linePossible(int beginCol, int beginRow,int playerId, int freeSpace , int size )const {
 	bool possible = true;
 	if (_board->inBound(beginCol,beginRow) && _board->inBound(beginCol+size-1, beginRow)) {
 		for (int col = beginCol;col < beginCol + size;col++) {
@@ -184,7 +184,7 @@ bool GoodIA::linePossible(int beginCol, int beginRow,int playerId, int freeSpace
 /*
 This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
 */
-bool GoodIA::checkAlllinesPossible(int  col, int  row, int playerId, int freeSpace , int size )const {
+bool MediumAI::checkAlllinesPossible(int  col, int  row, int playerId, int freeSpace , int size )const {
 	bool possible = false;
 
 	for (int c = col; c >= 0;c--) {
@@ -199,7 +199,7 @@ bool GoodIA::checkAlllinesPossible(int  col, int  row, int playerId, int freeSpa
 /*
 Same as line but for column
 */
-bool GoodIA::columnPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
+bool MediumAI::columnPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
 	bool possible = true;
 	if (_board->inBound(beginCol, beginRow) && _board->inBound(beginCol, beginRow+size -1)) {
 		for (int row = beginRow;row < beginRow + size;row++) {
@@ -223,7 +223,7 @@ bool GoodIA::columnPossible(int beginCol, int beginRow, int playerId, int freeSp
 /*
 This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
 */
-bool GoodIA::checkAllColumnPossible(int col, int row, int playerId, int freeSpace , int size )const {
+bool MediumAI::checkAllColumnPossible(int col, int row, int playerId, int freeSpace , int size )const {
 	bool possible = false;
 
 	for (int r = row; r >= 0;r--) {
@@ -238,7 +238,7 @@ bool GoodIA::checkAllColumnPossible(int col, int row, int playerId, int freeSpac
 /*
 Same as line but for column
 */
-bool GoodIA::leftDiagonalPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
+bool MediumAI::leftDiagonalPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
 	bool possible = true;
 	if (_board->inBound(beginCol, beginRow) && _board->inBound(beginCol-size+1, beginRow + size - 1)) {
 		for (int col=beginCol, row = beginRow;col>=0 || row < beginRow + size;col--,row++) {
@@ -262,7 +262,7 @@ bool GoodIA::leftDiagonalPossible(int beginCol, int beginRow, int playerId, int 
 /*
 This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
 */
-bool GoodIA::checkAllLeftDiagonalPossible(int col, int row, int playerId, int freeSpace , int size )const {
+bool MediumAI::checkAllLeftDiagonalPossible(int col, int row, int playerId, int freeSpace , int size )const {
 	bool possible = false;
 
 	for (int c=col,r = row; r >= 0;c++,r--) {
@@ -277,7 +277,7 @@ bool GoodIA::checkAllLeftDiagonalPossible(int col, int row, int playerId, int fr
 /*
 Same as line but for column
 */
-bool GoodIA::rightDiagonalPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
+bool MediumAI::rightDiagonalPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
 	bool possible = true;
 	if (_board->inBound(beginCol, beginRow) && _board->inBound(beginCol+size-1, beginRow + size - 1)) {
 		for (int col=beginCol, row = beginRow;col< beginCol + size || row < beginRow + size;col++,row++) {
@@ -301,7 +301,7 @@ bool GoodIA::rightDiagonalPossible(int beginCol, int beginRow, int playerId, int
 /*
 This function Return if a line is possible with the number of space ( 1 = a possible victory for the given player
 */
-bool GoodIA::checkAllRightDiagonalPossible(int col, int row, int playerId, int freeSpace , int size )const {
+bool MediumAI::checkAllRightDiagonalPossible(int col, int row, int playerId, int freeSpace , int size )const {
 	bool possible = false;
 
 	for (int c = col, r = row; c >= 0 && r >= 0;c--, r--) {
@@ -312,7 +312,7 @@ bool GoodIA::checkAllRightDiagonalPossible(int col, int row, int playerId, int f
 	}
 	return possible;
 }
-string GoodIA::hello() const
+string MediumAI::hello() const
 {
 	return string();
 }

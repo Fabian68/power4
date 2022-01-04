@@ -26,6 +26,7 @@ public:
 	void drawDisc(int column, int row, int color)const;
 	void displayText(int x, int y, std::string texte) const;
 	void redraw() const;
+	void displayWinner() const;
 
 	
 private:

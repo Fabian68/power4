@@ -6,32 +6,37 @@ Human::Human() : Player{}
 	std::cout << hello();
 }
 
-Human::Human(Board* board,Canvas * C): Player{board}
+Human::Human(Board* board, Canvas* canvas): Player{board}
 {
-	_canvas = C;
+	_canvas = canvas;
 }
 
 Human::~Human()
 {
 	_board = nullptr;
+	_canvas = nullptr;
 }
 
 void Human::playTurn()
 {
 	// Console (temporary)
-	_canvas->redraw();
-	
-	int col = _canvas->humanTurn();
+	/*cout << "Column ? : ";
+	int col;
+	cin >> col;
 	while (!_board->addDisc(col))
 	{
-		col = _canvas->humanTurn();
+		cout << "Already filled or invalid, column ? : ";
+		cin >> col;
 	}
+	_lastColPlayed = col;*/
+	
+	int col;
+	do
+	{
+		col = _canvas->humanTurn();
+	} while (!_board->addDisc(col));
 	
 	_lastColPlayed = col;
-
-	// Button clicks
-
-	
 }
 
 string Human::hello() const

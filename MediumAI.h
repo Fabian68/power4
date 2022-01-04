@@ -1,6 +1,6 @@
 #pragma once
 #include "Player.h"
-class GoodIA :
+class MediumAI :
     public Player
 {
 private:
@@ -8,9 +8,9 @@ private:
 	int _secondPlayerId;
 
 public:
-	GoodIA();
-	GoodIA(Board* board, int playerId,int secondPlayerId);
-	~GoodIA();
+	MediumAI();
+	MediumAI(Board* board, int playerId,int secondPlayerId);
+	~MediumAI();
 
 	// Plays by itself with calcul
 	virtual void playTurn() override;

@@ -6,6 +6,7 @@
 #include "Human.h"
 #include "RandomPlayer.h"
 #include "AI.h"
+#include "MediumAI.h"
 
 // init the board, the canvas with the board and the players todo
 Connect4::Connect4() : _board{}, _canvas{ _board }, _p1{ nullptr }, _p2{ nullptr }
@@ -42,6 +43,8 @@ Player* Connect4::createPlayer(int playerType)
 		case AI_PLAYER:
 			return new AI(&_board);
 			break;
+		case MEDIUM_AI_PLAYER:
+			return new MediumAI(&_board,PLAYER_1,PLAYER_2);
 		default :
 			return new RandomPlayer(&_board);
 			break;
@@ -70,20 +73,20 @@ void Connect4::play()
 	}
 
 	displayWinner();
-	//Luca c'est bugué ton truc tu checkera sa
-	//replay();
+
+	rematch();
 }
 
 void Connect4::displayWinner()
 {
 	// draw the winner on canvas instead
-	if (_board.isThereAWinner()) cout << "Player " << _board.getWinner() << "WINS" << endl;
-	else cout << "It's a draw !" << endl;
+	_canvas.displayWinner();
 }
 
-void Connect4::replay()
+void Connect4::rematch()
 {
 	// rematch ?
+	delay(3000);
 	_board.reset();
-
+	play();
 }

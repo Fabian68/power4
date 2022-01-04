@@ -13,7 +13,7 @@ Canvas::Canvas()
 // Save a ptr of the board to draw, init the window and the buttons, and draw all the components (board, buttons and player name)
 Canvas::Canvas(Board& board): _board{&board}
 {
-	int sizeX = 1400;
+	int sizeX = 1200;
 	int sizeY = 850;
 	initwindow(sizeX, sizeY, "Game de ouf");
 	setbkcolor(0);
@@ -40,8 +40,8 @@ Board* Canvas::getBoard() const
 
 void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 
-	choixJoueur1= RANDOM_PLAYER;
-	choixJoueur2= RANDOM_PLAYER;
+	choixJoueur1= HUMAN_PLAYER;
+	choixJoueur2= HUMAN_PLAYER;
 	int x = 100;
 	int y = 200;
 	int pasY = 100;
@@ -54,20 +54,20 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 		clique = false;
 		displayText(x, y, "ChoixJoueur1");
 		Bouton randomIAButtonP1 = Bouton(x + pasX, y, "Choix ia aléatoire");
-		Bouton goodIAButtonP1 = Bouton(x + pasX * 2, y, "Choix ia moyenne");
+		Bouton MediumAIButtonP1 = Bouton(x + pasX * 2, y, "Choix ia moyenne");
 		Bouton humanPlayerButtonP1 = Bouton(x + pasX * 3, y, "Choix joueur humain");
 
 		randomIAButtonP1.afficher();
-		goodIAButtonP1.afficher();
+		MediumAIButtonP1.afficher();
 		humanPlayerButtonP1.afficher();
 
 		displayText(x, y + pasY, "ChoixJoueur2");
 		Bouton randomIAButtonP2 = Bouton(x + pasX, y + pasY, "Choix ia aléatoire");
-		Bouton goodIAButtonP2 = Bouton(x + pasX * 2, y + pasY, "Choix ia moyenne");
+		Bouton MediumAIButtonP2 = Bouton(x + pasX * 2, y + pasY, "Choix ia moyenne");
 		Bouton humanPlayerButtonP2 = Bouton(x + pasX * 3, y + pasY, "Choix joueur humain");
 
 		randomIAButtonP2.afficher();
-		goodIAButtonP2.afficher();
+		MediumAIButtonP2.afficher();
 		humanPlayerButtonP2.afficher();
 
 		Bouton jouer = Bouton(x + pasX * 2, y + pasY * 2, "Jouer");
@@ -76,25 +76,25 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 
 		switch (choixJoueur1) {
 		case RANDOM_PLAYER:
-			displayText(x+pasX*5, y, "Choix actuelle : Random IA");
+			displayText(x+pasX*5, y, "Choix actuel : Random IA");
 			break;
-		case GOOD_AI_PLAYER:
-			displayText(x + pasX * 5, y, "Choix actuelle : Good IA");
+		case MEDIUM_AI_PLAYER:
+			displayText(x + pasX * 5, y, "Choix actuel : Medium IA");
 			break;
 		case HUMAN_PLAYER:
-			displayText(x + pasX * 5, y, "Choix actuelle :Joueur Humain ");
+			displayText(x + pasX * 5, y, "Choix actuel :Joueur Humain ");
 			break;
 		}
 
 		switch (choixJoueur2) {
 		case RANDOM_PLAYER:
-			displayText(x + pasX * 5, y+pasY, "Choix actuelle :Random IA ");
+			displayText(x + pasX * 5, y+pasY, "Choix actuel :Random IA ");
 			break;
-		case GOOD_AI_PLAYER:
-			displayText(x + pasX * 5, y + pasY, "Choix actuelle :Good IA ");
+		case MEDIUM_AI_PLAYER:
+			displayText(x + pasX * 5, y + pasY, "Choix actuel :Medium IA ");
 			break;
 		case HUMAN_PLAYER:
-			displayText(x + pasX * 5, y + pasY, "Choix actuelle :Joueur Humain");
+			displayText(x + pasX * 5, y + pasY, "Choix actuel :Joueur Humain");
 			break;
 		}
 
@@ -109,9 +109,9 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 				clique = true;
 				choixJoueur1 = RANDOM_PLAYER;
 			}
-			else if (goodIAButtonP1.comprendLesCoord(xc, yc)) {
+			else if (MediumAIButtonP1.comprendLesCoord(xc, yc)) {
 				clique = true;
-				choixJoueur1 = GOOD_AI_PLAYER;
+				choixJoueur1 = MEDIUM_AI_PLAYER;
 			}
 			else if (humanPlayerButtonP1.comprendLesCoord(xc, yc)) {
 				clique = true;
@@ -121,9 +121,9 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 				clique = true;
 				choixJoueur2 = RANDOM_PLAYER;
 			}
-			else if (goodIAButtonP2.comprendLesCoord(xc, yc)) {
+			else if (MediumAIButtonP2.comprendLesCoord(xc, yc)) {
 				clique = true;
-				choixJoueur2 = GOOD_AI_PLAYER;
+				choixJoueur2 = MEDIUM_AI_PLAYER;
 			}
 			else if (humanPlayerButtonP2.comprendLesCoord(xc, yc)) {
 				clique = true;
@@ -167,7 +167,9 @@ int Canvas::buttonNumberClicked(int x, int y)const {
 void Canvas::redraw() const
 {
 	cleardevice();
-	displayText(700, 20, "Tour du joueur : ");
+	std::string playerName = "Joueur 1";
+	if (_board->getNextPlayer() == PLAYER_2) playerName = "Joueur 2";
+	displayText(500, 20, "Tour du joueur : "+playerName);
 	drawButtons();
 	drawBoard();
 }
@@ -214,3 +216,9 @@ void Canvas::displayText(int x, int y, std::string texte)const {
 	outtextxy(x, y, txt);
 }
 
+void Canvas::displayWinner() const
+{
+	int winner = _board->getWinner();
+	if(winner != PLAYER_NONE) displayText(500, 50, "PLAYER " + std::to_string(winner) + " WINS");
+	else displayText(500, 50, "IT'S A DRAW !");
+}
