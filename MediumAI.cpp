@@ -28,56 +28,41 @@ void MediumAI::playTurn()
 	int col = 0;
 	int row;
 	while (col < cols) {
-		row = _board->getHeight(col);
-		if (checkAlllinesPossible(col,row,_playerId)) {
-			indexOfPlayableColumn.push_back(col);
-		}
-		
-		if (checkAllColumnPossible(col, row, _playerId)) {
-			indexOfPlayableColumn.push_back(col);
-		}
-		if (checkAllLeftDiagonalPossible(col, row, _playerId)) {
-			indexOfPlayableColumn.push_back(col);
-		}
-		if (checkAllRightDiagonalPossible(col, row, _playerId)) {
-			indexOfPlayableColumn.push_back(col);
+		if (!_board->isFilled(col)) {
+			row = _board->getHeight(col);
+			if (checkAlllinesPossible(col, row, _playerId)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+
+			if (checkAllColumnPossible(col, row, _playerId)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllLeftDiagonalPossible(col, row, _playerId)) {
+				indexOfPlayableColumn.push_back(col);
+			}
+			if (checkAllRightDiagonalPossible(col, row, _playerId)) {
+				indexOfPlayableColumn.push_back(col);
+			}
 		}
 		col++;
 	}
 	col = 0;
 	if (indexOfPlayableColumn.size() == 0) {
 		while (col < cols) {
-			row = _board->getHeight(col);
-			if (checkAlllinesPossible(col, row, _secondPlayerId)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllColumnPossible(col, row, _secondPlayerId)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			col++;
-		}
-	}
-	col = 0;
-	if (indexOfPlayableColumn.size() == 0) {
-		while (col < cols) {
-			row = _board->getHeight(col);
-			if (checkAlllinesPossible(col, row, _playerId,2)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllColumnPossible(col, row, _playerId,2)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllLeftDiagonalPossible(col, row, _playerId,2)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllRightDiagonalPossible(col, row, _playerId,2)) {
-				indexOfPlayableColumn.push_back(col);
+			if (!_board->isFilled(col)) {
+				row = _board->getHeight(col);
+				if (checkAlllinesPossible(col, row, _secondPlayerId)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllColumnPossible(col, row, _secondPlayerId)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllRightDiagonalPossible(col, row, _secondPlayerId)) {
+					indexOfPlayableColumn.push_back(col);
+				}
 			}
 			col++;
 		}
@@ -85,37 +70,20 @@ void MediumAI::playTurn()
 	col = 0;
 	if (indexOfPlayableColumn.size() == 0) {
 		while (col < cols) {
-			row = _board->getHeight(col);
-			if (checkAlllinesPossible(col, row, _secondPlayerId,2)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllColumnPossible(col, row, _secondPlayerId,2)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId,2)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId,2)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			col++;
-		}
-	}
-	col = 0;
-	if (indexOfPlayableColumn.size() == 0) {
-		while (col < cols) {
-			row = _board->getHeight(col);
-			if (checkAlllinesPossible(col, row, _playerId, 3)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllColumnPossible(col, row, _playerId, 3)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllLeftDiagonalPossible(col, row, _playerId, 3)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllRightDiagonalPossible(col, row, _playerId, 3)) {
-				indexOfPlayableColumn.push_back(col);
+			if (!_board->isFilled(col)) {
+				row = _board->getHeight(col);
+				if (checkAlllinesPossible(col, row, _playerId, 2)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllColumnPossible(col, row, _playerId, 2)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllLeftDiagonalPossible(col, row, _playerId, 2)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllRightDiagonalPossible(col, row, _playerId, 2)) {
+					indexOfPlayableColumn.push_back(col);
+				}
 			}
 			col++;
 		}
@@ -123,18 +91,62 @@ void MediumAI::playTurn()
 	col = 0;
 	if (indexOfPlayableColumn.size() == 0) {
 		while (col < cols) {
-			row = _board->getHeight(col);
-			if (checkAlllinesPossible(col, row, _secondPlayerId, 3)) {
-				indexOfPlayableColumn.push_back(col);
+			if (!_board->isFilled(col)) {
+				row = _board->getHeight(col);
+				if (checkAlllinesPossible(col, row, _secondPlayerId, 2)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllColumnPossible(col, row, _secondPlayerId, 2)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId, 2)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllRightDiagonalPossible(col, row, _secondPlayerId, 2)) {
+					indexOfPlayableColumn.push_back(col);
+				}
 			}
-			if (checkAllColumnPossible(col, row, _secondPlayerId, 3)) {
-				indexOfPlayableColumn.push_back(col);
+			col++;
+		}
+	}
+	col = 0;
+	if (indexOfPlayableColumn.size() == 0) {
+		while (col < cols) {
+			if (!_board->isFilled(col)) {
+				row = _board->getHeight(col);
+				if (checkAlllinesPossible(col, row, _playerId, 3)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllColumnPossible(col, row, _playerId, 3)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllLeftDiagonalPossible(col, row, _playerId, 3)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllRightDiagonalPossible(col, row, _playerId, 3)) {
+					indexOfPlayableColumn.push_back(col);
+				}
 			}
-			if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId, 3)) {
-				indexOfPlayableColumn.push_back(col);
-			}
-			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId, 3)) {
-				indexOfPlayableColumn.push_back(col);
+			col++;
+		}
+	}
+	col = 0;
+	if (indexOfPlayableColumn.size() == 0) {
+		while (col < cols) {
+			if (!_board->isFilled(col)) {
+				row = _board->getHeight(col);
+				if (checkAlllinesPossible(col, row, _secondPlayerId, 3)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllColumnPossible(col, row, _secondPlayerId, 3)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllLeftDiagonalPossible(col, row, _secondPlayerId, 3)) {
+					indexOfPlayableColumn.push_back(col);
+				}
+				if (checkAllRightDiagonalPossible(col, row, _secondPlayerId, 3)) {
+					indexOfPlayableColumn.push_back(col);
+				}
 			}
 			col++;
 		}
