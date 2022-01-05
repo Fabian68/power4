@@ -23,7 +23,7 @@ private:
 	Player* _p1, *_p2;
 
 	// Create (return) a random player by default
-	Player* createPlayer(int playerType);
+	Player* createPlayer(int playerType,int player=1);
 
 
 public:

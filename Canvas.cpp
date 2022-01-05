@@ -55,19 +55,23 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 		displayText(x, y, "ChoixJoueur1");
 		Bouton randomIAButtonP1 = Bouton(x + pasX, y, "Choix ia aléatoire");
 		Bouton MediumAIButtonP1 = Bouton(x + pasX * 2, y, "Choix ia moyenne");
-		Bouton humanPlayerButtonP1 = Bouton(x + pasX * 3, y, "Choix joueur humain");
+		Bouton AIButtonP1 = Bouton(x + pasX * 3, y, "Choix ia difficile");
+		Bouton humanPlayerButtonP1 = Bouton(x + pasX * 4, y, "Choix joueur humain");
 
 		randomIAButtonP1.afficher();
 		MediumAIButtonP1.afficher();
+		AIButtonP1.afficher();
 		humanPlayerButtonP1.afficher();
 
 		displayText(x, y + pasY, "ChoixJoueur2");
 		Bouton randomIAButtonP2 = Bouton(x + pasX, y + pasY, "Choix ia aléatoire");
 		Bouton MediumAIButtonP2 = Bouton(x + pasX * 2, y + pasY, "Choix ia moyenne");
-		Bouton humanPlayerButtonP2 = Bouton(x + pasX * 3, y + pasY, "Choix joueur humain");
+		Bouton AIButtonP2 = Bouton(x + pasX * 3, y+pasY, "Choix ia difficile");
+		Bouton humanPlayerButtonP2 = Bouton(x + pasX * 4, y + pasY, "Choix joueur humain");
 
 		randomIAButtonP2.afficher();
 		MediumAIButtonP2.afficher();
+		AIButtonP2.afficher();
 		humanPlayerButtonP2.afficher();
 
 		Bouton jouer = Bouton(x + pasX * 2, y + pasY * 2, "Jouer");
@@ -76,25 +80,31 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 
 		switch (choixJoueur1) {
 		case RANDOM_PLAYER:
-			displayText(x+pasX*5, y, "Choix actuel : Random IA");
+			displayText(x+pasX*6, y, "Choix actuel : Random IA         ");
 			break;
 		case MEDIUM_AI_PLAYER:
-			displayText(x + pasX * 5, y, "Choix actuel : Medium IA");
+			displayText(x + pasX * 6, y, "Choix actuel : Medium IA      ");
 			break;
 		case HUMAN_PLAYER:
-			displayText(x + pasX * 5, y, "Choix actuel :Joueur Humain ");
+			displayText(x + pasX * 6, y, "Choix actuel :Joueur Humain    ");
+			break;
+		case AI_PLAYER:
+			displayText(x + pasX * 6, y, "Choix actuel :IA Difficile   ");
 			break;
 		}
 
 		switch (choixJoueur2) {
 		case RANDOM_PLAYER:
-			displayText(x + pasX * 5, y+pasY, "Choix actuel :Random IA ");
+			displayText(x + pasX * 6, y+pasY, "Choix actuel :Random IA        ");
 			break;
 		case MEDIUM_AI_PLAYER:
-			displayText(x + pasX * 5, y + pasY, "Choix actuel :Medium IA ");
+			displayText(x + pasX * 6, y + pasY, "Choix actuel :Medium IA      ");
 			break;
 		case HUMAN_PLAYER:
-			displayText(x + pasX * 5, y + pasY, "Choix actuel :Joueur Humain");
+			displayText(x + pasX * 6, y + pasY, "Choix actuel :Joueur Humain  ");
+			break;
+		case AI_PLAYER:
+			displayText(x + pasX * 6, y+pasY, "Choix actuel :IA Difficile          ");
 			break;
 		}
 
@@ -128,6 +138,14 @@ void Canvas::drawMenu(int & choixJoueur1,int & choixJoueur2)const {
 			else if (humanPlayerButtonP2.comprendLesCoord(xc, yc)) {
 				clique = true;
 				choixJoueur2 = HUMAN_PLAYER;
+			}
+			else if (AIButtonP1.comprendLesCoord(xc, yc)) {
+				clique = true;
+				choixJoueur1 = AI_PLAYER;
+			}
+			else if (AIButtonP2.comprendLesCoord(xc, yc)) {
+				clique = true;
+				choixJoueur2 = AI_PLAYER;
 			}
 		} while (!clique);
 		//cleardevice();

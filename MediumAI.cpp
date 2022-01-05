@@ -149,7 +149,7 @@ void MediumAI::playTurn()
 		} while (!_board->addDisc(playedCol));
 	}
 	else {
-		playedCol = indexOfPlayableColumn[0];
+		playedCol = indexOfPlayableColumn[rand()%indexOfPlayableColumn.size()];
 		_board->addDisc(playedCol);
 	}
 
