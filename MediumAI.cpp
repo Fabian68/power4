@@ -240,7 +240,7 @@ Same as line but for column
 bool MediumAI::leftDiagonalPossible(int beginCol, int beginRow, int playerId, int freeSpace , int size )const {
 	bool possible = true;
 	if (_board->inBound(beginCol, beginRow) && _board->inBound(beginCol-size+1, beginRow + size - 1)) {
-		for (int col=beginCol, row = beginRow;col>=0 && row < beginRow + size;col--,row++) {
+		for (int col=beginCol, row = beginRow;col> beginCol - size && row < beginRow + size;col--,row++) {
 			if (_board->getValue(col, row) != playerId && _board->getValue(col, row) != PLAYER_NONE) {
 				possible = false;
 			}
@@ -265,7 +265,7 @@ bool MediumAI::checkAllLeftDiagonalPossible(int col, int row, int playerId, int 
 	bool possible = false;
 
 	for (int c=col,r = row; r >= 0;c++,r--) {
-		if (columnPossible(c, r, playerId, freeSpace, size)) {
+		if (leftDiagonalPossible(c, r, playerId, freeSpace, size)) {
 			possible = true;
 			
 		}
@@ -304,7 +304,7 @@ bool MediumAI::checkAllRightDiagonalPossible(int col, int row, int playerId, int
 	bool possible = false;
 
 	for (int c = col, r = row; c >= 0 && r >= 0;c--, r--) {
-		if (columnPossible(c, r, playerId, freeSpace, size)) {
+		if (rightDiagonalPossible(c, r, playerId, freeSpace, size)) {
 			possible = true;
 			
 		}
