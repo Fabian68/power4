@@ -1,7 +1,6 @@
 #include "AI.h"
 #include "Board.h"
 #include <climits>
-#include <cmath>
 #include <ctime>
 #include <cstdlib>
 
@@ -10,7 +9,7 @@ AI::AI() : Player{}
 	std::cout << hello();
 }
 
-AI::AI(Board* board): Player{board}, _allPaths(0)
+AI::AI(Board* board): Player{board}, _allPaths(0), _playerNum{-1}
 {
 
 }
@@ -26,16 +25,16 @@ AI::PossiblePath::PossiblePath(const vector<int>& playedCols, int score): _playe
 AI::PossiblePath::PossiblePath()
 {}
 
-
+int it = 0;
 int AI::minmax(Board& b, int depth, const vector<int>& playedCols)
 {
-	// if max depth or a player can win, evaluate
+	// if max depth or a player can win, evaluate	
 	if (depth == MINMAX_DEPTH || (playedCols.size()>0 && b.checkConnect(playedCols.back())))
 	{
 		int eval = evaluation(b,depth);
 		_allPaths.push_back(PossiblePath(playedCols,eval));
 		return eval;
-	}	
+	}
 
 	// otherwise, if this AI must play find best evaluation
 	if (b.getNextPlayer() == _playerNum)
@@ -49,6 +48,13 @@ int AI::minmax(Board& b, int depth, const vector<int>& playedCols)
 			{
 				nextPlayedCols.push_back(i);
 				int eval = minmax(nextB, depth + 1, nextPlayedCols);
+				maxEval = std::max(maxEval, eval);
+			}
+
+			else
+			{
+				int eval = evaluation(b, depth);
+				_allPaths.push_back(PossiblePath(playedCols, eval));
 				maxEval = std::max(maxEval, eval);
 			}
 		}
@@ -68,6 +74,13 @@ int AI::minmax(Board& b, int depth, const vector<int>& playedCols)
 			{
 				nextPlayedCols.push_back(i);
 				int eval = minmax(nextB, depth + 1, nextPlayedCols);
+				minEval = std::min(minEval, eval);
+			}
+
+			else
+			{
+				int eval = evaluation(b, depth);
+				_allPaths.push_back(PossiblePath(playedCols, eval));
 				minEval = std::min(minEval, eval);
 			}
 		}
@@ -94,6 +107,24 @@ void AI::playTurn()
 
 	int col;
 
+	//del
+	Board b = Board{ *_board };
+	vector<int> playedCols(0);
+
+	// minmax launching
+	int bestScore = minmax(b, 0, playedCols);
+
+	// searching played cols for best score
+	int path = 0;
+	while (path < _allPaths.size() && _allPaths[path]._score != bestScore)
+		++path;
+
+	// plays
+	col = _allPaths[path]._playedCols[0];
+	_board->addDisc(col);
+	//del
+
+	/*
 	// if does not play randomly, compute next plays
 	if (rand() % 101 > EPSILON)
 	{
@@ -110,7 +141,7 @@ void AI::playTurn()
 			++path;
 
 		// plays
-		int col = _allPaths[path]._playedCols[0];
+		col = _allPaths[path]._playedCols[0];
 		_board->addDisc(col);
 	}
 
@@ -121,7 +152,7 @@ void AI::playTurn()
 		{
 			col = rand() % cols;
 		} while (!_board->addDisc(col));
-	}
+	}*/
 
 	_lastColPlayed = col;
 }

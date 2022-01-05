@@ -11,20 +11,33 @@ vector<int> Board::getDiscHeights() const
 }
 
 // Init params and board with the empty value, num of player and none winner 
-Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{cols}, _rows{rows}, _connectedTokensToWin{connectedTokensToWin},
-	_winner{PLAYER_NONE}, _nextPlayer{PLAYER_1}
+Board::Board(int cols, int rows, int connectedTokensToWin) : _cols{ cols }, _rows{ rows }, _connectedTokensToWin{ connectedTokensToWin },
+_winner{ PLAYER_NONE }, _nextPlayer{ PLAYER_1 }
 {
 	_board.resize(cols);
 	_discHeights.resize(cols, 0);
 
-	for (int i = 0;i < cols;i++) {
+	for (int i = 0; i < cols; i++) {
 		_board[i].resize(rows, PLAYER_NONE);
 	}
 }
 
-Board::Board(const Board& b): _cols{b.getCols()}, _rows{b.getRows()}, _connectedTokensToWin{b.getConnectedTokensToWin()},
-	_winner{b.getWinner()}, _nextPlayer{b.getNextPlayer()}, _board{b.getBoard()}, _discHeights{b.getDiscHeights()}
-{}
+Board::Board(const Board& b) : _cols{ b.getCols() }, _rows{ b.getRows() }, _connectedTokensToWin{ b.getConnectedTokensToWin() },
+_winner{ b.getWinner() }, _nextPlayer{ b.getNextPlayer() }
+{
+	_board.resize(_cols);
+	_discHeights.resize(_cols);
+
+	for (int i = 0; i < _cols; i++)
+	{
+		_discHeights[i] = b.getHeight(i);
+		_board[i].resize(_rows);
+		for (int j = 0; j < _rows; j++)
+		{
+			_board[i][j] = b.getValue(i, j);
+		}
+	}
+}
 
 int Board::getCols() const
 {

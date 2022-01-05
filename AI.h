@@ -20,7 +20,7 @@ private :
 		int _score;
 	};
 
-	const int MINMAX_DEPTH = 7;
+	const int MINMAX_DEPTH = 6;
 	const int EPSILON = 5;
 	int _playerNum;
 	vector<PossiblePath> _allPaths;
