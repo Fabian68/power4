@@ -141,7 +141,6 @@ void MediumAI::playTurn()
 	}
 
 	int playedCol;
-	std::cout << indexOfPlayableColumn.size() << std::endl;
 	if (indexOfPlayableColumn.size() == 0) {
 		do
 		{

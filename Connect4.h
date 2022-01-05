@@ -25,7 +25,8 @@ private:
 	// Create (return) a random player by default
 	Player* createPlayer(int playerType,int player=1);
 
-
+	int _cptWinnerPlayer1 ;
+	int _cptWinnerPlayer2 ;
 public:
 	Connect4();
 	Connect4(int cols, int rows, int connectedTokensToWin);
