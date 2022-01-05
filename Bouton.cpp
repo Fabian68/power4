@@ -17,7 +17,7 @@ void Bouton::afficher() const
 	fillpoly(4, Tab);
 
 	setcolor(_couleurTexte);
-	std::cout << _texte;
+	//std::cout << _texte;
 	char* perso = const_cast<char*>(_texte.c_str());
 	outtextxy(_x1+10, _y1+12, perso);
 

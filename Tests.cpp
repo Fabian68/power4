@@ -76,8 +76,6 @@ TEST_CASE("Testing the canvas") {
 }
 
 TEST_CASE("Tesing the game") {
-    Board b = Board{};
-    Canvas v = Canvas{ b };
     Connect4 C = Connect4(7, 6, 4);
 
     while (!kbhit())

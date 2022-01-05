@@ -101,7 +101,6 @@ bool Board::checkVerticalLine(int col, int row)
 	{
 		_winner = playedColor;
 		return true;
-		std::cout << "vertical line !";
 	}
 
 	else return false;
