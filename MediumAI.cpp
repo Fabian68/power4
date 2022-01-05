@@ -32,7 +32,7 @@ void MediumAI::playTurn()
 		if (checkAlllinesPossible(col,row,_playerId)) {
 			indexOfPlayableColumn.push_back(col);
 		}
-		/*
+		
 		if (checkAllColumnPossible(col, row, _playerId)) {
 			indexOfPlayableColumn.push_back(col);
 		}
@@ -41,7 +41,7 @@ void MediumAI::playTurn()
 		}
 		if (checkAllRightDiagonalPossible(col, row, _playerId)) {
 			indexOfPlayableColumn.push_back(col);
-		}*/
+		}
 		col++;
 	}
 	col = 0;
@@ -50,7 +50,7 @@ void MediumAI::playTurn()
 			row = _board->getHeight(col);
 			if (checkAlllinesPossible(col, row, _secondPlayerId)) {
 				indexOfPlayableColumn.push_back(col);
-			}/*
+			}
 			if (checkAllColumnPossible(col, row, _secondPlayerId)) {
 				indexOfPlayableColumn.push_back(col);
 			}
@@ -59,7 +59,7 @@ void MediumAI::playTurn()
 			}
 			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId)) {
 				indexOfPlayableColumn.push_back(col);
-			}*/
+			}
 			col++;
 		}
 	}
@@ -69,7 +69,7 @@ void MediumAI::playTurn()
 			row = _board->getHeight(col);
 			if (checkAlllinesPossible(col, row, _playerId,2)) {
 				indexOfPlayableColumn.push_back(col);
-			}/*
+			}
 			if (checkAllColumnPossible(col, row, _playerId,2)) {
 				indexOfPlayableColumn.push_back(col);
 			}
@@ -78,7 +78,7 @@ void MediumAI::playTurn()
 			}
 			if (checkAllRightDiagonalPossible(col, row, _playerId,2)) {
 				indexOfPlayableColumn.push_back(col);
-			}*/
+			}
 			col++;
 		}
 	}
@@ -88,7 +88,7 @@ void MediumAI::playTurn()
 			row = _board->getHeight(col);
 			if (checkAlllinesPossible(col, row, _secondPlayerId,2)) {
 				indexOfPlayableColumn.push_back(col);
-			}/*
+			}
 			if (checkAllColumnPossible(col, row, _secondPlayerId,2)) {
 				indexOfPlayableColumn.push_back(col);
 			}
@@ -97,7 +97,7 @@ void MediumAI::playTurn()
 			}
 			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId,2)) {
 				indexOfPlayableColumn.push_back(col);
-			}*/
+			}
 			col++;
 		}
 	}
@@ -107,7 +107,7 @@ void MediumAI::playTurn()
 			row = _board->getHeight(col);
 			if (checkAlllinesPossible(col, row, _playerId, 3)) {
 				indexOfPlayableColumn.push_back(col);
-			}/*
+			}
 			if (checkAllColumnPossible(col, row, _playerId, 3)) {
 				indexOfPlayableColumn.push_back(col);
 			}
@@ -116,7 +116,7 @@ void MediumAI::playTurn()
 			}
 			if (checkAllRightDiagonalPossible(col, row, _playerId, 3)) {
 				indexOfPlayableColumn.push_back(col);
-			}*/
+			}
 			col++;
 		}
 	}
@@ -126,7 +126,7 @@ void MediumAI::playTurn()
 			row = _board->getHeight(col);
 			if (checkAlllinesPossible(col, row, _secondPlayerId, 3)) {
 				indexOfPlayableColumn.push_back(col);
-			}/*
+			}
 			if (checkAllColumnPossible(col, row, _secondPlayerId, 3)) {
 				indexOfPlayableColumn.push_back(col);
 			}
@@ -135,7 +135,7 @@ void MediumAI::playTurn()
 			}
 			if (checkAllRightDiagonalPossible(col, row, _secondPlayerId, 3)) {
 				indexOfPlayableColumn.push_back(col);
-			}*/
+			}
 			col++;
 		}
 	}
@@ -170,8 +170,8 @@ bool MediumAI::linePossible(int beginCol, int beginRow,int playerId, int freeSpa
 				freeSpace--;
 			}
 		}
-		if (freeSpace == 0) {
-			possible = true;
+		if (freeSpace != 0) {
+			possible = false;
 		}
 	}
 	else {
@@ -210,8 +210,8 @@ bool MediumAI::columnPossible(int beginCol, int beginRow, int playerId, int free
 				freeSpace--;
 			}
 		}
-		if (freeSpace == 0) {
-			possible = true;
+		if (freeSpace != 0) {
+			possible = false;
 		}
 	}
 	else {
@@ -249,8 +249,8 @@ bool MediumAI::leftDiagonalPossible(int beginCol, int beginRow, int playerId, in
 				freeSpace--;
 			}
 		}
-		if (freeSpace == 0) {
-			possible = true;
+		if (freeSpace != 0) {
+			possible = false;
 		}
 	}
 	else {
@@ -288,8 +288,8 @@ bool MediumAI::rightDiagonalPossible(int beginCol, int beginRow, int playerId, i
 				freeSpace--;
 			}
 		}
-		if (freeSpace == 0) {
-			possible = true;
+		if (freeSpace != 0) {
+			possible = false;
 		}
 	}
 	else {
