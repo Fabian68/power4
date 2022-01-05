@@ -74,6 +74,7 @@ void Connect4::play()
 			_p2->playTurn();
 			colPlayed = _p2->getLastColPlayed();
 		}
+		//should bee
 		_canvas.redraw();
 
 		// Update the winner
@@ -87,6 +88,7 @@ void Connect4::play()
 		_cptWinnerPlayer2++;
 	}
 	if ((_cptWinnerPlayer1 + _cptWinnerPlayer2) % 100 == 0) {
+		std::cout<<std::endl;
 		std::cout << "Joueur 1 : " << _cptWinnerPlayer1 << " victoires." << std::endl;
 		std::cout << "Joueur 2 : " << _cptWinnerPlayer2 << " victoires." << std::endl;
 	}
