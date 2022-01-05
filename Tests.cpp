@@ -7,7 +7,7 @@
 #include "AI.h"
 #include "RandomPlayer.h"
 #include "Connect4.h"
-
+/*
 TEST_CASE("Tesing the Player polymorphism") {
     Player* h = new Human();
     Player* ai = new AI();
@@ -74,9 +74,9 @@ TEST_CASE("Testing the canvas") {
     v.drawDisc(5, 0, RED);
   
 }
-
+*/
 TEST_CASE("Tesing the game") {
-    Connect4 C = Connect4(7, 6, 4);
+    Connect4 C = Connect4(2, 6, 4);
 
     while (!kbhit())
     {

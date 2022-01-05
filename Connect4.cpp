@@ -60,7 +60,6 @@ Player* Connect4::createPlayer(int playerType,int player)
 
 void Connect4::play()
 {
-	
 	_canvas.redraw();
 	while (!_board.isThereAWinner() && !_board.allFilled())
 	{
@@ -74,12 +73,13 @@ void Connect4::play()
 			_p2->playTurn();
 			colPlayed = _p2->getLastColPlayed();
 		}
-		//should bee
+
 		_canvas.redraw();
 
 		// Update the winner
 		_board.checkConnect(colPlayed);
 	}
+
 	int winner = _board.getWinner();
 	if (winner == PLAYER_1) {
 		_cptWinnerPlayer1++;

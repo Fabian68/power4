@@ -20,11 +20,20 @@ private :
 		int _score;
 	};
 
-	const int MINMAX_DEPTH = 6;
+	class PossibleCol
+	{
+	public:
+		PossibleCol();
+		PossibleCol(int col, int score);
+		int _possibleCol;
+		int _score;
+	};
+
+	const int MINMAX_DEPTH = 3;
 	const int EPSILON = 5;
 	int _playerNum;
-	vector<PossiblePath> _allPaths;
-
+	//vector<PossiblePath> _allPaths;
+	vector<PossibleCol> _allPossibleCols;
 
 public:
 	AI();

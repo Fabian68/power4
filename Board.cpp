@@ -213,7 +213,7 @@ bool Board::checkConnect(int col)
 
 bool Board::addDisc(int col)
 {
-	if (col >= 0 && col < _cols && !isFilled(col)) {
+	if (col >= 0 && col < _cols && !isFilled(col) && _winner==PLAYER_NONE) {
 		_board[col][_discHeights[col]] = _nextPlayer;
 		++_discHeights[col];
 		if (_nextPlayer == PLAYER_1) _nextPlayer = PLAYER_2;
@@ -240,6 +240,6 @@ void Board::clear()
 void Board::reset()
 {
 	clear();
-	_nextPlayer = _winner;
+	if(_winner != PLAYER_NONE) _nextPlayer = _winner;
 	_winner = PLAYER_NONE;
 }
