@@ -19,12 +19,6 @@ AI::~AI()
 	_board = nullptr;
 }
 
-AI::PossiblePath::PossiblePath(const vector<int>& playedCols, int score): _playedCols{playedCols}, _score{score}
-{}
-
-AI::PossiblePath::PossiblePath()
-{}
-
 AI::PossibleCol::PossibleCol() : _possibleCol{ -1 }, _score{INT_MIN}
 {
 }
@@ -50,49 +44,41 @@ int AI::minmax(Board& b, int depth, const vector<int>& playedCols)
 	// if max depth or a player can win, evaluate	
 	if (depth == MINMAX_DEPTH || (playedCols.size() > 0 && (b.checkConnect(playedCols.back()) || b.allFilled())))
 	{
-		//cout << "eval " << depth << endl;
-		b.checkConnect(playedCols.back());// << endl;
-		//printBoard(b);
-		//cout << "lastplayedcol " << playedCols.back() << "/" << b.getWinner() << endl << endl;
+		b.checkConnect(playedCols.back());
 		int eval = evaluation(b, depth);
-		//_allPaths.push_back(PossiblePath(playedCols, eval));
 		return eval;
 	}
 
 	// otherwise, if this AI must play find best evaluation
 	if (b.getNextPlayer() == _playerNum)
 	{
-		//cout << "max " << depth << endl;
 		int maxEval = INT_MIN;
 		vector<int> evals(0);
 		for (int i = 0; i < b.getCols(); i++)
 		{
 			Board nextB = Board{ b };
 			vector<int> nextPlayedCols(playedCols);
-			//cout << "sizes : " << playedCols.size() << " " << nextPlayedCols.size() << endl;
 			if (nextB.addDisc(i))
 			{
 				nextPlayedCols.push_back(i);
 				int eval = minmax(nextB, depth + 1, nextPlayedCols);
 				if (depth == 0) _allPossibleCols.push_back(PossibleCol{ i,eval });
 				evals.push_back(eval);
-				//maxEval = std::max(maxEval, eval);
 			}
 		}
-		cout << "max of ";
+		//cout << "max of ";
 		for (int e = 0; e < evals.size(); e++)
 		{
-			cout << evals[e] << " ";
+			//cout << evals[e] << " ";
 			maxEval = std::max(maxEval, evals[e]);
 		}
-		cout << endl;
+		//cout << endl;
 		return maxEval;
 	}
 
 	// or if this is the other player turn, find worst evaluation
 	else
 	{
-		//cout << "min " << depth << endl;
 		int minEval = INT_MAX;
 		vector<int> evals(0);
 
@@ -100,25 +86,21 @@ int AI::minmax(Board& b, int depth, const vector<int>& playedCols)
 		{
 			Board nextB = Board{ b };
 			vector<int> nextPlayedCols(playedCols);
-			//cout << "sizes : ";
-			//for(int k=0; k<playedCols.size();k++) cout<< playedCols[k] << "-" << nextPlayedCols[k] << " ";
-			//cout << endl;
 
 			if (nextB.addDisc(i))
 			{
 				nextPlayedCols.push_back(i);
 				int eval = minmax(nextB, depth + 1, nextPlayedCols);
 				evals.push_back(eval);
-				//minEval = std::min(minEval, eval);
 			}
 		}
-		cout << "min of ";
+		//cout << "min of ";
 		for (int e = 0; e < evals.size(); e++)
 		{
-			cout << evals[e] << " ";
+			//cout << evals[e] << " ";
 			minEval = std::min(minEval, evals[e]);
 		}
-		cout << endl;
+		//cout << endl;
 		return minEval;
 	}
 }
@@ -224,32 +206,33 @@ void AI::playTurn()
 	// minmax launching
 	minmax(b, 0, playedCols);
 
+	int bestCol = 0;
+	int bestScore = INT_MIN;
 	/*
-	for (int i = 0; i < _allPaths.size(); i++)
+	cout << "Nb possible cols : " << _allPossibleCols.size() << endl;
+	for (int c = 0; c < _allPossibleCols.size(); c++)
 	{
-		cout << "score " << _allPaths[i]._score << " for : ";
-		for (int j = 0; j < _allPaths[i]._playedCols.size(); j++)
-			cout << _allPaths[i]._playedCols[j]<<".";
-		cout << endl << endl;
+		cout << "col" << _allPossibleCols[c]._possibleCol << " scored " << _allPossibleCols[c]._score << endl;
+	}*/
+
+	for (int c = 0; c < _allPossibleCols.size(); c++)
+	{
+		if (_allPossibleCols[c]._score > bestScore)
+		{
+			bestCol = c;
+			bestScore = _allPossibleCols[c]._score;
+		}
 	}
 
-	// searching played cols for best score
-	int path = 0;
-	while (path < _allPaths.size() && _allPaths[path]._score != bestScore)
-		++path;*/
-	int bestCol = -1;
-	int bestScore = INT_MIN;
-	for (int c = 0; c < _allPossibleCols.size(); c++)
-		if (_allPossibleCols[c]._score > bestScore) bestCol = c;
-	col = bestCol;
+	col = _allPossibleCols[bestCol]._possibleCol;
 
 	// plays
-	//col = _allPaths[path]._playedCols[0];
 	_board->addDisc(col);
-	//_allPaths.clear();
 	_allPossibleCols.clear();
 	//del
 	cout << "AI played " << col << endl;
+
+
 	/*
 	// if does not play randomly, compute next plays
 	if (rand() % 101 > EPSILON)

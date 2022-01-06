@@ -76,7 +76,7 @@ TEST_CASE("Testing the canvas") {
 }
 */
 TEST_CASE("Tesing the game") {
-    Connect4 C = Connect4(2, 6, 4);
+    Connect4 C = Connect4(7, 6, 4);
 
     while (!kbhit())
     {
