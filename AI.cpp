@@ -194,7 +194,7 @@ int AI::evaluation(const Board& b, int depth)
 
 void AI::playTurn()
 {
-	cout <<endl<< "-------------------------------------------" << endl;
+	//cout <<endl<< "-------------------------------------------" << endl;
     _playerNum = _board->getNextPlayer();
 
 	int col;
@@ -230,7 +230,7 @@ void AI::playTurn()
 	_board->addDisc(col);
 	_allPossibleCols.clear();
 	//del
-	cout << "AI played " << col << endl;
+	//cout << "AI played " << col << endl;
 
 
 	/*

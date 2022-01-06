@@ -15,7 +15,7 @@ Canvas::Canvas(Board& board): _board{&board}
 {
 	int sizeX = 1200;
 	int sizeY = 850;
-	initwindow(sizeX, sizeY, "Game de ouf");
+	initwindow(sizeX, sizeY, "Connect 4");
 	setbkcolor(0);
 	setcolor(RED);
 	_buttons.resize(_board->getCols());

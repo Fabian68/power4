@@ -3,7 +3,7 @@
 class Bouton
 {
 public:
-	Bouton(int xDepart, int yDepart, std::string texte, int couleurRectangle = BLACK, int couleurBordure = RED, int couleurTexte = RED);
+	Bouton(int xDepart, int yDepart, std::string texte, int couleurRectangle = BLACK, int couleurBordure = YELLOW, int couleurTexte = YELLOW);
 	Bouton();
 	void afficher()const;
 	bool comprendLesCoord(int x, int y)const;

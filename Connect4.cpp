@@ -63,6 +63,7 @@ void Connect4::play()
 	_canvas.redraw();
 	while (!_board.isThereAWinner() && !_board.allFilled())
 	{
+		delay(500);
 		// Current player plays its turn
 		int colPlayed;
 		if (_board.getNextPlayer() == PLAYER_1) {
@@ -87,7 +88,7 @@ void Connect4::play()
 	else {
 		_cptWinnerPlayer2++;
 	}
-	if ((_cptWinnerPlayer1 + _cptWinnerPlayer2) % 100 == 0) {
+	if ((_cptWinnerPlayer1 + _cptWinnerPlayer2) % 20 == 0) {
 		std::cout<<std::endl;
 		std::cout << "Joueur 1 : " << _cptWinnerPlayer1 << " victoires." << std::endl;
 		std::cout << "Joueur 2 : " << _cptWinnerPlayer2 << " victoires." << std::endl;
